@@ -1,0 +1,26 @@
+# Auth Reference (v3)
+
+The `Auth` class manages authentication, credential verification, and OAuth2/JWT token lifecycle in the v3 SDK.
+
+## Methods
+
+### Auth.login()
+
+Authenticates a user identity and retrieves a short-lived bearer token with requested authorization scopes.
+
+| Parameter | Type | Default | Required | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `username` | `str` | `None` | `true` | The account email or username string for authentication. |
+| `scopes` | `list[str]` | `["read"]` | `true` | List of requested authorization scope permissions attached to the session token. |
+| `token_ttl_sec` | `int` | `3600` | `false` | Time-to-live duration for issued JWT bearer tokens in seconds before requiring refresh. |
+
+#### Example Usage
+
+```python
+auth = Auth(auth_url="https://auth.example.com")
+token = auth.login(
+    username="admin@company.com",
+    scopes=["read", "write"],
+    token_ttl_sec=3600
+)
+```

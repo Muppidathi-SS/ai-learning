@@ -1,0 +1,26 @@
+# Webhook Reference (v3)
+
+The `Webhook` class manages outbound HTTP POST notification listener registrations and payload cryptographic signatures in the v3 SDK.
+
+## Methods
+
+### Webhook.register_listener()
+
+Registers an HTTP endpoint to receive event callbacks with signature signing and failure retry policies.
+
+| Parameter | Type | Default | Required | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `target_url` | `str` | `None` | `true` | HTTPS endpoint URL address to send HTTP POST event notifications. |
+| `signature_algorithm` | `str` | `"HMAC-SHA256"` | `true` | Cryptographic algorithm used to sign event payload headers. |
+| `max_delivery_attempts` | `int` | `5` | `false` | Maximum retry count before dead-lettering webhook delivery failures. |
+
+#### Example Usage
+
+```python
+webhook = Webhook()
+listener_id = webhook.register_listener(
+    target_url="https://api.myapp.com/webhooks",
+    signature_algorithm="HMAC-SHA256",
+    max_delivery_attempts=5
+)
+```

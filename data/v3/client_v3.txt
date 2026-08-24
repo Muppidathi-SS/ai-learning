@@ -1,0 +1,26 @@
+# Client Reference (v3)
+
+The `Client` class is the main entry point for network requests in the v3 SDK. It supports optimized exponential backoff retries, connection pooling, and payload validation.
+
+## Methods
+
+### Client.send()
+
+Sends a structured payload to the target endpoint with customizable retry backoff and timeout parameters.
+
+| Parameter | Type | Default | Required | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `payload` | `dict` | `None` | `true` | JSON-serializable request payload dictionary containing request data. |
+| `retry_backoff_ms` | `int` | `250` | `false` | Initial backoff duration in milliseconds before retrying a failed HTTP request. |
+| `timeout_s` | `int` | `30` | `false` | Maximum duration in seconds to wait for a server response before throwing TimeoutError. |
+
+#### Example Usage
+
+```python
+client = Client(api_key="sk_live_v3_998877")
+response = client.send(
+    payload={"query": "analytics"},
+    retry_backoff_ms=250,
+    timeout_s=30
+)
+```

@@ -1,0 +1,26 @@
+# Stream Reference (v3)
+
+The `Stream` class provides real-time WebSocket connection handling and streaming telemetry ingestion in the v3 SDK.
+
+## Methods
+
+### Stream.subscribe()
+
+Establishes a persistent event channel subscription with buffer management and automatic heartbeat pings.
+
+| Parameter | Type | Default | Required | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `channel_name` | `str` | `None` | `true` | Target WebSocket event topic/channel name to subscribe to. |
+| `max_buffer_size` | `int` | `1024` | `false` | Maximum number of queued incoming messages held in memory before frame overflow. |
+| `keep_alive_ping_ms` | `int` | `5000` | `false` | Heartbeat ping interval duration in milliseconds to sustain active socket connection. |
+
+#### Example Usage
+
+```python
+stream = Stream(endpoint="wss://stream.example.com")
+subscription = stream.subscribe(
+    channel_name="telemetry_events",
+    max_buffer_size=1024,
+    keep_alive_ping_ms=5000
+)
+```
