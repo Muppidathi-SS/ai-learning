@@ -1,0 +1,26 @@
+# Batch Reference (v3)
+
+The `Batch` class handles bulk job submission, concurrency control, and automated retries in the v3 SDK.
+
+## Methods
+
+### Batch.submit_jobs()
+
+Submits a collection of task payloads for asynchronous parallel execution across worker clusters.
+
+| Parameter | Type | Default | Required | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `job_list` | `list[dict]` | `None` | `true` | Collection of batch job payload dictionaries containing task parameters. |
+| `max_concurrency` | `int` | `10` | `false` | Maximum number of concurrent worker tasks allowed per execution batch. |
+| `auto_retry_failed` | `bool` | `true` | `false` | Automatically re-queue transient worker node execution failures. |
+
+#### Example Usage
+
+```python
+batch = Batch(cluster="us-east-1")
+job_ids = batch.submit_jobs(
+    job_list=[{"task": "encode", "id": 101}, {"task": "encode", "id": 102}],
+    max_concurrency=10,
+    auto_retry_failed=True
+)
+```

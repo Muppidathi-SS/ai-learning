@@ -1,0 +1,26 @@
+# Config Reference (v3)
+
+The `Config` class handles environment configuration loading, file parsing, and runtime option validation in the v3 SDK.
+
+## Methods
+
+### Config.load_settings()
+
+Parses system options from local files and environment variables with configurable validation strictness.
+
+| Parameter | Type | Default | Required | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `file_path` | `str` | `"config.yaml"` | `false` | Path to local YAML or JSON configuration file on disk. |
+| `env_override` | `bool` | `true` | `false` | Whether environment variables override parameters read from the configuration file. |
+| `strict_validation` | `bool` | `false` | `false` | Enforce strict schema validation and reject unknown configuration keys. |
+
+#### Example Usage
+
+```python
+config = Config()
+settings = config.load_settings(
+    file_path="config.yaml",
+    env_override=True,
+    strict_validation=False
+)
+```
