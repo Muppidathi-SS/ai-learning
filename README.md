@@ -1,36 +1,27 @@
-# Week 3 Practical — Task Set E: SDK v3 Documentation RAG & Chunking Benchmark
+# Week 5 Practical — Task Set E: Reading Traces Like a Professional
 
-## Problem Statement Overview
-The **v3 SDK release** landed with 6 new reference documentation pages (`client_v3.md`, `auth_v3.md`, `batch_v3.md`, `config_v3.md`, `stream_v3.md`, `webhook_v3.md`). Each page contains parameter tables (`Parameter`, `Type`, `Default`, `Required`) wrapped in prose and fenced code samples.
+## Overview
+**Domain:** Developer Documentation  
+**Week:** 5 — Error Analysis — Reading Traces Like a Professional  
+**Module:** M3 — Evals & Error Analysis · THE CORE  
 
-This repository tests whether your chunking strategy preserves parameter defaults (e.g. `retry_backoff_ms`) attached to their parent methods (e.g. `Client.send()`) or cuts code fences and table rows mid-line.
+This project implements error analysis and trace inspection for an SDK documentation assistant that accumulated over 1,000 production traces. We draw a seeded random sample of 20 traces, verify trace replayability, perform honest open-coding with zero code fixes, cluster observations into a ranked failure taxonomy, formulate a dated falsifiable prediction, and analyze team blind spots via the bonus demo-set evaluation.
 
 ---
 
-## Directory Structure
-```
-week-3-task/
-├── docs/
-│   ├── v2/
-│   │   └── client_v2.md          # Legacy v2 SDK reference page
-│   └── v3/
-│       ├── auth_v3.md            # v3 Auth reference page
-│       ├── batch_v3.md           # v3 Batch reference page
-│       ├── client_v3.md          # v3 Client reference page
-│       ├── config_v3.md          # v3 Config reference page
-│       ├── stream_v3.md          # v3 Stream reference page
-│       └── webhook_v3.md         # v3 Webhook reference page
-├── src/
-│   ├── __init__.py
-│   ├── chunkers.py               # Strategy 1 (Naive Fixed-Size) & Strategy 2 (Structure-Aware Markdown)
-│   ├── indexer.py                # Embedding vector index builder (MiniLM-L6-v2)
-│   ├── retriever.py              # Similarity retriever with metadata filters
-│   └── generator.py              # Grounded response generator with refusal logic
-├── run_pipeline.py               # Main evaluation benchmark engine
-├── results.md                    # Primary deliverable (Submission Report)
-├── requirements.txt              # Project dependencies
-└── README.md                     # Documentation
-```
+## Deliverables
+- **`taxonomy.md`**: One-page ranked failure taxonomy fitting on a single screen with 5 named failure modes, counts, frequency percentages, severity ratings, and example trace IDs.
+- **`notes.md`**: Complete evaluation report containing:
+  - Seeded random sample details (`seed = 42`) and all 20 sampled trace IDs
+  - 20 verbatim open-coding observation sentences (no category labels or premature diagnoses)
+  - Trace replay evidence for trace `TR-0229` showing 100% bit-for-bit equivalence from trace data alone
+  - Reconstructed schema fields audit (`prompt_version`, `retrieved_chunks` with scores/content, `model_params`, `raw_output`)
+  - Dated falsifiable prediction (`2026-09-16`) with expected quantitative deltas
+  - 3-sentence public benchmark critique
+  - Bonus Challenge: Demo set vs. random sample top-mode frequency comparison and team confirmation bias analysis.
+- **`traces.jsonl`**: 1,050 full-schema production traces logged across developer queries.
+- **`run_week5.py`**: Evaluation runner reproducing seeded sampling, trace replay verification, and bonus analysis.
+- **`generate_traces.py`**: Generation script used to simulate the week's production traffic across the corpus.
 
 ---
 
@@ -41,8 +32,8 @@ week-3-task/
 pip install -r requirements.txt
 ```
 
-### 2. Run the Evaluation Benchmark Pipeline
+### 2. Run the Week 5 Evaluation Runner
 ```bash
-python3 run_pipeline.py
+python run_week5.py
 ```
-This runs the full benchmark across 8 known-answer queries, evaluates Hit-in-Top-5 performance for Naive vs. Structure-Aware chunkers, demonstrates metadata filtering (`sdk_version='v3'`), tests refusal behavior on 3 out-of-corpus queries, and outputs the final submission report to **`results.md`**.
+This script loads `traces.jsonl`, draws the 20 seeded traces (`seed = 42`), performs deterministic replay of trace `TR-0229`, prints side-by-side verification, and computes the bonus challenge metrics.
