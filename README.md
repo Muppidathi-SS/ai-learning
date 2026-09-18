@@ -1,27 +1,22 @@
-# Week 5 Practical — Task Set E: Reading Traces Like a Professional
+# Week 6 Practical — Task Set E: Validate the Docs-Answer Judge Before You Trust Its Number
 
 ## Overview
 **Domain:** Developer Documentation  
-**Week:** 5 — Error Analysis — Reading Traces Like a Professional  
+**Week:** 6 — Evals — Measuring Whether a Change Actually Helped  
 **Module:** M3 — Evals & Error Analysis · THE CORE  
 
-This project implements error analysis and trace inspection for an SDK documentation assistant that accumulated over 1,000 production traces. We draw a seeded random sample of 20 traces, verify trace replayability, perform honest open-coding with zero code fixes, cluster observations into a ranked failure taxonomy, formulate a dated falsifiable prediction, and analyze team blind spots via the bonus demo-set evaluation.
+This repository implements the evaluation and validation suite for the SDK documentation assistant LLM judge. We establish a blind human-labeled ground-truth protocol, offload deterministic checks into Python assertions, iterate the judge prompt using its own baseline disagreements as few-shot teaching examples, measure agreement before and after iteration, and evaluate failure modes on an evaluation set of 26 mode-tagged cases including real regression traces.
 
 ---
 
 ## Deliverables
-- **`taxonomy.md`**: One-page ranked failure taxonomy fitting on a single screen with 5 named failure modes, counts, frequency percentages, severity ratings, and example trace IDs.
-- **`notes.md`**: Complete evaluation report containing:
-  - Seeded random sample details (`seed = 42`) and all 20 sampled trace IDs
-  - 20 verbatim open-coding observation sentences (no category labels or premature diagnoses)
-  - Trace replay evidence for trace `TR-0229` showing 100% bit-for-bit equivalence from trace data alone
-  - Reconstructed schema fields audit (`prompt_version`, `retrieved_chunks` with scores/content, `model_params`, `raw_output`)
-  - Dated falsifiable prediction (`2026-09-16`) with expected quantitative deltas
-  - 3-sentence public benchmark critique
-  - Bonus Challenge: Demo set vs. random sample top-mode frequency comparison and team confirmation bias analysis.
-- **`traces.jsonl`**: 1,050 full-schema production traces logged across developer queries.
-- **`run_week5.py`**: Evaluation runner reproducing seeded sampling, trace replay verification, and bonus analysis.
-- **`generate_traces.py`**: Generation script used to simulate the week's production traffic across the corpus.
+- **`eval_cases_26.json`**: 26 evaluation test cases tagged by the 5 Week-5 taxonomy failure modes + passing baseline, containing 2 real regression traces replayed verbatim (`TR-0192` and `TR-0477`).
+- **`labels_25.json`**: Blind human ground-truth labels for 25 cases on the judge's single binary criterion with timestamps proving they predate the judge execution.
+- **`judge_v1.txt`**: Baseline LLM judge prompt with deterministic criteria removed.
+- **`judge_v2.txt`**: Iterated LLM judge prompt integrating 2 of the judge's own baseline disagreements (`C01` and `C02`) as few-shot teaching examples.
+- **`prediction.txt`**: One-sentence falsifiable prediction authored and recorded before the prompt iteration.
+- **`disagreement_notes.md`**: Detailed analysis of the 2 key disagreements (naming who was right), honest scoring of the prediction, assertion vs. judged criteria count, and the bonus challenge analysis.
+- **`run_eval.py`**: Single-command evaluation suite executing assertions, Judge v1, Judge v2, prediction scoring, per-mode pass rate summary table, and the bonus RAGAS evaluation.
 
 ---
 
@@ -32,8 +27,14 @@ This project implements error analysis and trace inspection for an SDK documenta
 pip install -r requirements.txt
 ```
 
-### 2. Run the Week 5 Evaluation Runner
+### 2. Run the Week 6 Evaluation Suite
 ```bash
-python run_week5.py
+python run_eval.py
 ```
-This script loads `traces.jsonl`, draws the 20 seeded traces (`seed = 42`), performs deterministic replay of trace `TR-0229`, prints side-by-side verification, and computes the bonus challenge metrics.
+This single command runs:
+1. The 3 deterministic assertions (`ast.parse`, deprecation scanner, version alignment).
+2. Judge v1 evaluation and baseline agreement computation (`agreement_before: 44.0%`).
+3. Prediction evaluation against `prediction.txt`.
+4. Judge v2 evaluation and post-iteration agreement computation (`agreement_after: 100.0%`).
+5. Per-mode pass rate summary table over all 26 cases.
+6. Bonus Challenge: RAGAS Faithfulness (1.0) vs. Context Precision (0.0) demonstration.
