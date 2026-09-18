@@ -1,52 +1,6 @@
 import re
 from typing import List, Dict, Any
 
-class NaiveChunker:
-    """
-    Strategy 1: Naive Fixed-Size Chunker (Beginner Implementation)
-    
-    This chunker simply cuts document text into fixed character slices (e.g., 200 characters)
-    with a small overlap (40 characters).
-    
-    Why it's "naive":
-    It ignores Markdown headers, parameter tables, and code fences. As a result, it often
-    cuts table rows in half or separates method headers from their parameter descriptions.
-    """
-    def __init__(self, chunk_size: int = 200, overlap: int = 40):
-        self.chunk_size = chunk_size
-        self.overlap = overlap
-
-    def chunk(self, text: str, doc_metadata: Dict[str, Any]) -> List[Dict[str, Any]]:
-        chunks = []
-        text_len = len(text)
-        start = 0
-        chunk_idx = 0
-
-        # Loop through text in fixed-size character windows
-        while start < text_len:
-            end = min(start + self.chunk_size, text_len)
-            chunk_str = text[start:end]
-            
-            # Copy document metadata and attach a unique chunk_id
-            chunk_metadata = doc_metadata.copy()
-            chunk_id = f"{doc_metadata['sdk_version']}_{doc_metadata['page_id']}_naive_{chunk_idx:03d}"
-            
-            chunks.append({
-                "chunk_id": chunk_id,
-                "content": chunk_str,
-                "metadata": chunk_metadata,
-                "strategy": "naive"
-            })
-            
-            if end == text_len:
-                break
-            # Move sliding window forward by (chunk_size - overlap)
-            start += (self.chunk_size - self.overlap)
-            chunk_idx += 1
-
-        return chunks
-
-
 class StructureAwareChunker:
     """
     Strategy 2: Structure-Aware Markdown Chunker (Beginner Implementation)

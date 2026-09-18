@@ -1,0 +1,1 @@
+Adding explicit few-shot examples of subtle version confusion (v2 values answering unversioned v3 questions) and missing code blocks will force the judge to penalize obsolete parameter defaults and empty snippet responses, lifting human-judge agreement from ~68% to above 90% across the 25-case eval set.
