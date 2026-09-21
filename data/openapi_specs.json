@@ -1,0 +1,171 @@
+{
+  "v1": {
+    "/v1/client/send": {
+      "method": "POST",
+      "summary": "Send request payload with v1 client",
+      "parameters": {
+        "payload": {"type": "object", "required": true},
+        "retry_backoff_ms": {"type": "integer", "default": 1000},
+        "timeout": {"type": "integer", "default": 120}
+      },
+      "responses": {
+        "200": {"description": "Payload delivered successfully"}
+      }
+    },
+    "/v1/auth/login": {
+      "method": "POST",
+      "summary": "Authenticate v1 user credentials",
+      "parameters": {
+        "username": {"type": "string", "required": true},
+        "session_expiry": {"type": "integer", "default": 1800}
+      },
+      "responses": {
+        "200": {"description": "Session token generated"}
+      }
+    }
+  },
+  "v2": {
+    "/v2/client/send": {
+      "method": "POST",
+      "summary": "Send request payload with v2 client",
+      "parameters": {
+        "payload": {"type": "object", "required": true},
+        "retry_backoff_ms": {"type": "integer", "default": 500},
+        "timeout_s": {"type": "integer", "default": 60}
+      },
+      "responses": {
+        "200": {"description": "Payload delivered successfully"}
+      }
+    },
+    "/v2/auth/login": {
+      "method": "POST",
+      "summary": "Authenticate v2 user credentials",
+      "parameters": {
+        "username": {"type": "string", "required": true},
+        "scopes": {"type": "array", "items": {"type": "string"}, "default": ["read"]},
+        "token_ttl_sec": {"type": "integer", "default": 7200}
+      },
+      "responses": {
+        "200": {"description": "Bearer token generated"}
+      }
+    },
+    "/v2/stream/feed": {
+      "method": "GET",
+      "summary": "Connect to telemetry stream feed (Deprecated in v3)",
+      "parameters": {
+        "channel": {"type": "string", "required": true},
+        "buffer_len": {"type": "integer", "default": 512},
+        "ping_interval": {"type": "integer", "default": 10000}
+      },
+      "responses": {
+        "101": {"description": "Switching protocols to WebSocket"}
+      }
+    },
+    "/v2/batch/dispatch": {
+      "method": "POST",
+      "summary": "Dispatch batch jobs (Deprecated in v3)",
+      "parameters": {
+        "payloads": {"type": "array", "required": true},
+        "concurrency": {"type": "integer", "default": 5}
+      },
+      "responses": {
+        "202": {"description": "Jobs accepted"}
+      }
+    },
+    "/v2/config/settings": {
+      "method": "GET",
+      "summary": "Retrieve configuration settings",
+      "parameters": {
+        "path": {"type": "string", "default": "config.json"}
+      },
+      "responses": {
+        "200": {"description": "Configuration dictionary"}
+      }
+    },
+    "/v2/webhook/subscribe": {
+      "method": "POST",
+      "summary": "Subscribe webhook endpoint",
+      "parameters": {
+        "callback_url": {"type": "string", "required": true},
+        "retries": {"type": "integer", "default": 3}
+      },
+      "responses": {
+        "201": {"description": "Subscription confirmed"}
+      }
+    }
+  },
+  "v3": {
+    "/v3/client/send": {
+      "method": "POST",
+      "summary": "Send structured payload with v3 client",
+      "parameters": {
+        "payload": {"type": "object", "required": true},
+        "retry_backoff_ms": {"type": "integer", "default": 250},
+        "timeout_s": {"type": "integer", "default": 30}
+      },
+      "responses": {
+        "200": {"description": "Response data returned"}
+      }
+    },
+    "/v3/auth/token": {
+      "method": "POST",
+      "summary": "Acquire short-lived JWT bearer token with granular scopes",
+      "parameters": {
+        "username": {"type": "string", "required": true},
+        "scopes": {"type": "array", "items": {"type": "string"}, "default": ["read"]},
+        "token_ttl_sec": {"type": "integer", "default": 3600}
+      },
+      "responses": {
+        "200": {"description": "JWT bearer token returned"}
+      }
+    },
+    "/v3/stream/subscribe": {
+      "method": "GET",
+      "summary": "Subscribe to real-time WebSocket telemetry event stream",
+      "parameters": {
+        "channel_name": {"type": "string", "required": true},
+        "max_buffer_size": {"type": "integer", "default": 1024},
+        "keep_alive_ping_ms": {"type": "integer", "default": 5000}
+      },
+      "responses": {
+        "101": {"description": "WebSocket upgraded"}
+      }
+    },
+    "/v3/batch/submit_jobs": {
+      "method": "POST",
+      "summary": "Submit parallel batch execution tasks with automated retries",
+      "parameters": {
+        "job_list": {"type": "array", "required": true},
+        "max_concurrency": {"type": "integer", "default": 10},
+        "auto_retry_failed": {"type": "boolean", "default": true}
+      },
+      "responses": {
+        "202": {"description": "Batch job execution queued"}
+      }
+    },
+    "/v3/config/settings": {
+      "method": "GET",
+      "summary": "Load settings from disk and environment variables",
+      "parameters": {
+        "file_path": {"type": "string", "default": "config.yaml"},
+        "env_override": {"type": "boolean", "default": true},
+        "strict_validation": {"type": "boolean", "default": false}
+      },
+      "responses": {
+        "200": {"description": "Active settings loaded"}
+      }
+    },
+    "/v3/webhook/register": {
+      "method": "POST",
+      "summary": "Register outbound event notification listener with HMAC signatures",
+      "parameters": {
+        "target_url": {"type": "string", "required": true},
+        "signature_algorithm": {"type": "string", "default": "HMAC-SHA256"},
+        "max_delivery_attempts": {"type": "integer", "default": 5}
+      },
+      "responses": {
+        "201": {"description": "Listener registered with assigned ID"}
+      }
+    }
+  }
+}

@@ -1,0 +1,4 @@
+[2026-09-19 16:45:28] [BUDGET_TERMINATION] Question: 'How do I migrate Client.send to v3?...' | Reason: max_iterations exceeded (2 >= 2) | Exited Cleanly: True
+[2026-09-19 16:45:28] [BUDGET_TERMINATION] Question: 'How do I migrate Client.send to v3?...' | Reason: max_tokens exceeded (878 >= 300) | Exited Cleanly: True
+[2026-09-19 16:45:28] [BUDGET_TERMINATION] Question: 'How do I migrate Client.send to v3?...' | Reason: max_cost exceeded ($0.01010 >= $0.00010) | Exited Cleanly: True
+[2026-09-19 16:45:28] [BUDGET_TERMINATION] Question: 'How do I migrate Client.send to v3?...' | Reason: wall_clock_seconds exceeded (0.15s >= 0.10s) | Exited Cleanly: True
