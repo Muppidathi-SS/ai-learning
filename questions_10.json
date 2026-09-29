@@ -5,7 +5,14 @@
     "current_version": "v2",
     "target_version": "v3",
     "requires_dynamic_branching": false,
-    "primary_symbol": "Client.send"
+    "primary_symbol": "Client.send",
+    "optimal_steps": 3,
+    "mandatory_tools": ["get_openapi_spec"],
+    "allowed_paths": [
+      ["check_deprecation", "get_openapi_spec", "search_docs"],
+      ["get_openapi_spec", "check_deprecation", "search_docs"],
+      ["check_deprecation", "get_openapi_spec"]
+    ]
   },
   {
     "id": "q2",
@@ -13,7 +20,14 @@
     "current_version": "v2",
     "target_version": "v3",
     "requires_dynamic_branching": false,
-    "primary_symbol": "Auth.login"
+    "primary_symbol": "Auth.login",
+    "optimal_steps": 3,
+    "mandatory_tools": ["get_openapi_spec"],
+    "allowed_paths": [
+      ["check_deprecation", "get_openapi_spec", "search_docs"],
+      ["check_deprecation", "get_openapi_spec"],
+      ["search_docs", "get_openapi_spec"]
+    ]
   },
   {
     "id": "q3",
@@ -21,7 +35,14 @@
     "current_version": "v2",
     "target_version": "v3",
     "requires_dynamic_branching": true,
-    "primary_symbol": "Stream.feed"
+    "primary_symbol": "Stream.feed",
+    "optimal_steps": 3,
+    "mandatory_tools": ["get_openapi_spec", "search_docs"],
+    "allowed_paths": [
+      ["check_deprecation", "get_openapi_spec", "search_docs"],
+      ["get_openapi_spec", "check_deprecation", "search_docs"],
+      ["get_openapi_spec", "search_docs"]
+    ]
   },
   {
     "id": "q4",
@@ -29,7 +50,14 @@
     "current_version": "v2",
     "target_version": "v3",
     "requires_dynamic_branching": true,
-    "primary_symbol": "Batch.dispatch"
+    "primary_symbol": "Batch.dispatch",
+    "optimal_steps": 3,
+    "mandatory_tools": ["get_openapi_spec", "search_docs"],
+    "allowed_paths": [
+      ["check_deprecation", "get_openapi_spec", "search_docs"],
+      ["get_openapi_spec", "check_deprecation", "search_docs"],
+      ["get_openapi_spec", "search_docs"]
+    ]
   },
   {
     "id": "q5",
@@ -37,7 +65,14 @@
     "current_version": "v2",
     "target_version": "v3",
     "requires_dynamic_branching": true,
-    "primary_symbol": "Config.get_config"
+    "primary_symbol": "Config.get_config",
+    "optimal_steps": 3,
+    "mandatory_tools": ["get_openapi_spec", "search_docs"],
+    "allowed_paths": [
+      ["check_deprecation", "get_openapi_spec", "search_docs"],
+      ["get_openapi_spec", "check_deprecation", "search_docs"],
+      ["get_openapi_spec", "search_docs"]
+    ]
   },
   {
     "id": "q6",
@@ -45,7 +80,14 @@
     "current_version": "v2",
     "target_version": "v3",
     "requires_dynamic_branching": false,
-    "primary_symbol": "Webhook.subscribe"
+    "primary_symbol": "Webhook.subscribe",
+    "optimal_steps": 3,
+    "mandatory_tools": ["get_openapi_spec"],
+    "allowed_paths": [
+      ["check_deprecation", "get_openapi_spec", "search_docs"],
+      ["check_deprecation", "search_docs"],
+      ["get_openapi_spec", "check_deprecation"]
+    ]
   },
   {
     "id": "q7",
@@ -53,7 +95,15 @@
     "current_version": "v2",
     "target_version": "v3",
     "requires_dynamic_branching": false,
-    "primary_symbol": "Client.send"
+    "primary_symbol": "Client.send",
+    "optimal_steps": 2,
+    "mandatory_tools": ["get_openapi_spec"],
+    "allowed_paths": [
+      ["check_deprecation", "get_openapi_spec"],
+      ["get_openapi_spec", "check_deprecation"],
+      ["check_deprecation", "get_openapi_spec", "search_docs"],
+      ["get_openapi_spec", "search_docs"]
+    ]
   },
   {
     "id": "q8",
@@ -61,7 +111,14 @@
     "current_version": "v2",
     "target_version": "v3",
     "requires_dynamic_branching": true,
-    "primary_symbol": "Stream.feed"
+    "primary_symbol": "Stream.feed",
+    "optimal_steps": 3,
+    "mandatory_tools": ["get_openapi_spec", "search_docs"],
+    "allowed_paths": [
+      ["check_deprecation", "get_openapi_spec", "search_docs"],
+      ["get_openapi_spec", "search_docs"],
+      ["get_openapi_spec", "check_deprecation", "search_docs"]
+    ]
   },
   {
     "id": "q9",
@@ -69,7 +126,14 @@
     "current_version": "v2",
     "target_version": "v3",
     "requires_dynamic_branching": true,
-    "primary_symbol": "Batch.dispatch"
+    "primary_symbol": "Batch.dispatch",
+    "optimal_steps": 3,
+    "mandatory_tools": ["get_openapi_spec"],
+    "allowed_paths": [
+      ["check_deprecation", "get_openapi_spec", "search_docs"],
+      ["get_openapi_spec", "search_docs"],
+      ["get_openapi_spec", "check_deprecation"]
+    ]
   },
   {
     "id": "q10",
@@ -77,6 +141,14 @@
     "current_version": "v2",
     "target_version": "v3",
     "requires_dynamic_branching": false,
-    "primary_symbol": "Auth.login"
+    "primary_symbol": "Auth.login",
+    "optimal_steps": 2,
+    "mandatory_tools": ["get_openapi_spec"],
+    "allowed_paths": [
+      ["get_openapi_spec"],
+      ["check_deprecation", "get_openapi_spec"],
+      ["check_deprecation", "get_openapi_spec", "search_docs"],
+      ["get_openapi_spec", "search_docs"]
+    ]
   }
 ]

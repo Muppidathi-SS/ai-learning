@@ -1,45 +1,65 @@
-# Week 7 Practical — Task Set E: Race the Docs Agent Against a Fixed Workflow
+# Week 8 Engineering Challenge: Agent Failure Modes & Trajectory Evals
 
 ## Overview
-- **Domain:** Developer Documentation
-- **Week:** 7 — Agent Loops — and When Not to Use Them
-- **Module:** M4 — Agents
-- **Marks:** 100
-
-This repository implements the comparison suite between an autonomous documentation migration agent and a deterministic 3-step hardcoded workflow for developer SDK migration tasks.
+- **Domain:** Developer Documentation & Migration Agents
+- **Week:** 8 — Agent Failure Modes & Trajectory Evals
+- **Module:** M4 — Agents & Trajectory Evaluations
+- **Core Focus:** Exposing and closing the Outcome-vs-Trajectory Gap, single mitigation experiments, and indirect prompt injection defense.
 
 ---
 
-## Deliverables & Structure
-- **`src/tools.py`**: Implementation of `search_docs`, `get_openapi_spec`, and the new 3rd tool `check_deprecation` with zero description overlap. Uses strongly-typed `ApiVersion` Enum (`v1`, `v2`, `v3`).
-- **`src/workflow.py`**: Deterministic 3-step hardcoded pipeline (`check_deprecation` → `get_openapi_spec` → `search_docs` & write sample) sharing identical input and output schemas with the agent.
-- **`src/agent.py`**: Autonomous agent loop enforcing all 4 strict budgets (`max_iterations`, `max_tokens`, `max_cost`, `wall_clock_seconds`) with cumulative token accounting (summed across every lap) and clean termination handling.
-- **`src/memory.py`**: Bonus Challenge implementation: Sliding window memory with periodic summarization for long threads (30 turns) preserving user constraints across multiple window evictions.
-- **`data/openapi_specs.json` & `data/deprecations.json`**: OpenAPI schema definitions and deprecation registry across v1, v2, and v3 APIs.
-- **`questions_10.json`**: 10 migration questions, including dynamic branching scenarios where downstream steps depend on OpenAPI spec findings.
-- **`run_race.py`**: Single-command race runner executing both systems across all 10 questions, computing the 4 comparison numbers, running budget limit stress tests, and producing `race.csv`.
-- **`race.csv`**: Comparison metrics across the 10 questions: Pass Rate (%), p50 Latency (s), Total Tokens (summed over all laps), Cost Per Question ($).
-- **`budget_termination.log`**: Log demonstrating that all 4 budgets fired and exited cleanly.
-- **`tool_diff.md`**: 3-line git diff of the tool registration alone with zero description overlap explanation.
-- **`verdict.md`**: Decision rule verdict under 150 words answering when to use the agent over the workflow, citing the 4 numbers from the race.
-- **`notes_w7.md`**: Architectural notes and bonus challenge evaluation.
+## Key Deliverables Summary
+
+| Deliverable | File Path | Description |
+| :--- | :--- | :--- |
+| **1. Trajectory Eval Suite** | [`trajectory_eval.py`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/trajectory_eval.py) | Comprehensive CLI runner executing 10 queries with flexible path sets. |
+| **2. Trajectory Metrics Engine** | [`src/trajectory_engine.py`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/src/trajectory_engine.py) | Telemetry engine computing Tool-Choice Accuracy, Argument Validity, Step Efficiency, and Cost (p50 & Max). |
+| **3. Test Specification** | [`data/test_cases_w8.json`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/data/test_cases_w8.json) | 10 migration test queries with allowed path sets, optimal steps, and mandatory tools. |
+| **4. Failure Mode Taxonomy** | [`taxonomy.md`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/taxonomy.md) | Formal taxonomy of failure modes (FM-1 to FM-5) with severity, root cause, and examples. |
+| **5. Mitigation & Gap Report** | [`eval_report_w8.md`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/eval_report_w8.md) | Full engineering report detailing gap calculation (60.0%), exposed trace (`q10`), mitigation delta (-3), regression matrix, and injection defense. |
+| **6. Prompt Injection Defense** | [`src/injection_defense.py`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/src/injection_defense.py) | 3-layer defense (ToolSanitizer, ScopeManager, SecurityCodeGuardrail) against indirect prompt injection. |
+| **7. Automated Unit Tests** | [`tests/test_trajectory_eval.py`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/tests/test_trajectory_eval.py) & [`tests/test_injection_defense.py`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/tests/test_injection_defense.py) | Unit tests verifying flexible path assertions, argument validation, and security guardrails. |
 
 ---
 
 ## Quick Start Instructions
 
-### 1. Run the Race & Budget Verification
+### 1. Run the Full Week 8 Evaluation Suite
 ```bash
-python run_race.py
+python trajectory_eval.py
 ```
 This executes:
-1. Fixed 3-step workflow across 10 migration questions.
-2. Autonomous agent loop across 10 migration questions.
-3. Generation of `race.csv` with the 4 key comparison numbers.
-4. Enforcement and validation of all 4 budgets in `budget_termination.log`.
+1. Baseline agent evaluation across 10 queries using flexible path assertions.
+2. Trajectory Metrics Engine telemetry:
+   - Tool-Choice Accuracy: **84.62%**
+   - Argument Validity Rate: **96.15%**
+   - Step Efficiency: **Actual/Optimal = 0.9286 | Optimal/Actual = 1.0769**
+   - Cost Distribution: **p50 = $0.001669 | Max = $0.002619** (worst-case variance: +56.9%)
+3. Outcome-vs-Trajectory Gap calculation: **100.0% - 40.0% = 60.0%**.
+4. False Positive trace expose on query `q10` (auth session token migration).
+5. Single Targeted Mitigation experiment (Mandatory Spec Grounding Contract):
+   - FM-1 Before $\rightarrow$ After: **3 $\rightarrow$ 0 (-100% reduction)**.
+   - Gap reduced from **60.0% $\rightarrow$ 30.0%**.
+   - Price Paid measured: **+98 tokens/q, +$0.000159/q, +0.0ms p50 latency**.
+6. Per-Mode Regression Matrix audit (0 regressions, 0 new failure modes).
+7. Bonus Challenge: Indirect prompt injection attack simulated inside community docs comments and 100% neutralized by 3-layer defense.
 
-### 2. Run the Bonus Challenge Test
+### 2. Run Automated Verification Tests
 ```bash
+python tests/test_trajectory_eval.py
+python tests/test_injection_defense.py
+```
+
+### 3. Verify Week 7 Race Backward Compatibility
+```bash
+python run_race.py
 python tests/test_bonus_memory.py
 ```
-Demonstrates that a user's pinned SDK version mentioned in Turn 2 survives into Turn 28 despite 4 sliding window evictions.
+
+---
+
+## Week 7 Reference (Preserved)
+- **`run_race.py`**: Races docs agent against fixed 3-step workflow.
+- **`race.csv`**: Comparison metrics across fixed workflow vs agent loop.
+- **`budget_termination.log`**: Proof of all 4 budget limit terminations.
+- **`verdict.md`**: Architectural decision rule verdict (<150 words).
