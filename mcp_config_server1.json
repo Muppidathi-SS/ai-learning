@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "docs-server": {
+      "command": "python",
+      "args": ["-m", "src.mcp.docs_server"],
+      "description": "Developer Documentation Search and OpenAPI Schema Server"
+    }
+  }
+}

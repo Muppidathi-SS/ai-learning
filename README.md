@@ -1,65 +1,35 @@
-# Week 8 Engineering Challenge: Agent Failure Modes & Trajectory Evals
+# Week 9 Practical — Task Set E: Bolt on the Package-Registry Server
 
 ## Overview
-- **Domain:** Developer Documentation & Migration Agents
-- **Week:** 8 — Agent Failure Modes & Trajectory Evals
-- **Module:** M4 — Agents & Trajectory Evaluations
-- **Core Focus:** Exposing and closing the Outcome-vs-Trajectory Gap, single mitigation experiments, and indirect prompt injection defense.
+- **Domain:** Developer Documentation
+- **Week:** 9 — MCP — The Standard Way Agents Reach Tools & Data
+- **Module:** M5 — MCP, Multi-agent & A2A
+- **Core Objective:** Prove dynamic tool discovery by bolting on DevRel's `package-registry` MCP server with zero code changes in the agent module.
 
 ---
 
-## Key Deliverables Summary
+## Deliverables & Submission Checklist
 
-| Deliverable | File Path | Description |
+| Item | File | Description |
 | :--- | :--- | :--- |
-| **1. Trajectory Eval Suite** | [`trajectory_eval.py`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/trajectory_eval.py) | Comprehensive CLI runner executing 10 queries with flexible path sets. |
-| **2. Trajectory Metrics Engine** | [`src/trajectory_engine.py`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/src/trajectory_engine.py) | Telemetry engine computing Tool-Choice Accuracy, Argument Validity, Step Efficiency, and Cost (p50 & Max). |
-| **3. Test Specification** | [`data/test_cases_w8.json`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/data/test_cases_w8.json) | 10 migration test queries with allowed path sets, optimal steps, and mandatory tools. |
-| **4. Failure Mode Taxonomy** | [`taxonomy.md`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/taxonomy.md) | Formal taxonomy of failure modes (FM-1 to FM-5) with severity, root cause, and examples. |
-| **5. Mitigation & Gap Report** | [`eval_report_w8.md`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/eval_report_w8.md) | Full engineering report detailing gap calculation (60.0%), exposed trace (`q10`), mitigation delta (-3), regression matrix, and injection defense. |
-| **6. Prompt Injection Defense** | [`src/injection_defense.py`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/src/injection_defense.py) | 3-layer defense (ToolSanitizer, ScopeManager, SecurityCodeGuardrail) against indirect prompt injection. |
-| **7. Automated Unit Tests** | [`tests/test_trajectory_eval.py`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/tests/test_trajectory_eval.py) & [`tests/test_injection_defense.py`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/tests/test_injection_defense.py) | Unit tests verifying flexible path assertions, argument validation, and security guardrails. |
+| **1. Agent Diff** | [`agent_diff.txt`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/agent_diff.txt) | Proves **ZERO lines changed** in `src/agent.py` between server 1 and server 1+2. |
+| **2. Config Diff** | [`config_diff.txt`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/config_diff.txt) | Shows the configuration diff adding the second server (`mcp_config.json`). |
+| **3. Wire Protocol** | [`wire.json`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/wire.json) | Hand-annotated raw JSON-RPC `initialize` -> `tools/list` -> `tools/call` capture and model-call statement. |
+| **4. Tool Count Line** | Console & Summary | `3 before -> 6 after, with tool names: [search_docs, get_openapi_spec, check_symbol_deprecation] -> [search_docs, get_openapi_spec, check_symbol_deprecation, get_package_versions, get_deprecation_notice, get_release_metadata]` |
+| **5. Error Recovery** | [`error_before_after.md`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/error_before_after.md) | Docstring rewritten as prompt and before/after transcript of model recovering from failed version lookup. |
+| **6. Supply-Chain Risk** | [`risk_note.md`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/risk_note.md) | Exactly 5 lines answering who wrote it, what it reaches, what it logs, what a stolen token could do, and ship/don't. |
+| **7. Bonus Gateway** | [`src/mcp/gateway.py`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/src/mcp/gateway.py) | Front-door gateway with fan-out, single-line audit logging, and scoped token authorization. |
 
 ---
 
-## Quick Start Instructions
+## Quick Start & Running the Output File
 
-### 1. Run the Full Week 8 Evaluation Suite
+To run the complete Week 9 suite:
 ```bash
-python trajectory_eval.py
-```
-This executes:
-1. Baseline agent evaluation across 10 queries using flexible path assertions.
-2. Trajectory Metrics Engine telemetry:
-   - Tool-Choice Accuracy: **84.62%**
-   - Argument Validity Rate: **96.15%**
-   - Step Efficiency: **Actual/Optimal = 0.9286 | Optimal/Actual = 1.0769**
-   - Cost Distribution: **p50 = $0.001669 | Max = $0.002619** (worst-case variance: +56.9%)
-3. Outcome-vs-Trajectory Gap calculation: **100.0% - 40.0% = 60.0%**.
-4. False Positive trace expose on query `q10` (auth session token migration).
-5. Single Targeted Mitigation experiment (Mandatory Spec Grounding Contract):
-   - FM-1 Before $\rightarrow$ After: **3 $\rightarrow$ 0 (-100% reduction)**.
-   - Gap reduced from **60.0% $\rightarrow$ 30.0%**.
-   - Price Paid measured: **+98 tokens/q, +$0.000159/q, +0.0ms p50 latency**.
-6. Per-Mode Regression Matrix audit (0 regressions, 0 new failure modes).
-7. Bonus Challenge: Indirect prompt injection attack simulated inside community docs comments and 100% neutralized by 3-layer defense.
-
-### 2. Run Automated Verification Tests
-```bash
-python tests/test_trajectory_eval.py
-python tests/test_injection_defense.py
+python run_week9.py
 ```
 
-### 3. Verify Week 7 Race Backward Compatibility
+To run automated unit tests:
 ```bash
-python run_race.py
-python tests/test_bonus_memory.py
+python tests/test_week9.py
 ```
-
----
-
-## Week 7 Reference (Preserved)
-- **`run_race.py`**: Races docs agent against fixed 3-step workflow.
-- **`race.csv`**: Comparison metrics across fixed workflow vs agent loop.
-- **`budget_termination.log`**: Proof of all 4 budget limit terminations.
-- **`verdict.md`**: Architectural decision rule verdict (<150 words).
