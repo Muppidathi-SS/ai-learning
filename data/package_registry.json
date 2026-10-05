@@ -1,0 +1,56 @@
+{
+  "packages": {
+    "ai-sdk": {
+      "name": "ai-sdk",
+      "description": "Official Python SDK for Core AI Services and Streaming Workflows",
+      "latest_version": "v3.2.0",
+      "versions": [
+        {
+          "version": "v1.0.0",
+          "release_date": "2024-01-10T12:00:00Z",
+          "status": "sunset",
+          "is_deprecated": true,
+          "deprecation_notice": "Sunset on 2025-06-30. Deprecated cryptographic primitives. Direct upgrade to v3.2.0 required."
+        },
+        {
+          "version": "v1.2.0",
+          "release_date": "2024-04-18T10:30:00Z",
+          "status": "sunset",
+          "is_deprecated": true,
+          "deprecation_notice": "Sunset on 2025-06-30. Maintenance ended."
+        },
+        {
+          "version": "v2.0.0",
+          "release_date": "2024-08-15T09:00:00Z",
+          "status": "deprecated",
+          "is_deprecated": true,
+          "deprecation_notice": "Deprecated on 2026-01-15. End-of-life scheduled for 2026-12-31. Replacement: v3.2.0. Breaking changes: Client.send signature changed; Auth.login deprecated."
+        },
+        {
+          "version": "v2.4.1",
+          "release_date": "2025-02-01T14:15:00Z",
+          "status": "deprecated",
+          "is_deprecated": true,
+          "deprecation_notice": "Deprecated. Final bugfix release for v2 branch."
+        },
+        {
+          "version": "v3.0.0",
+          "release_date": "2025-09-01T08:00:00Z",
+          "status": "active",
+          "is_deprecated": false,
+          "deprecation_notice": null
+        },
+        {
+          "version": "v3.2.0",
+          "release_date": "2026-03-15T11:45:00Z",
+          "status": "active",
+          "is_deprecated": false,
+          "deprecation_notice": null
+        }
+      ],
+      "maintainer": "DevRel Systems Team <devrel@internal.company.net>",
+      "repository": "https://git.internal.company.net/core/ai-sdk",
+      "license": "Apache-2.0"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+--- mcp_config_server1.json
++++ mcp_config.json
+@@ -6,4 +6,8 @@
+       "command": "python",
+       "args": ["-m", "src.mcp.docs_server"],
+       "description": "Developer Documentation Search and OpenAPI Schema Server"
++    },
++    "package-registry": {
++      "command": "python",
++      "args": ["-m", "src.mcp.registry_server"],
++      "description": "DevRel Package Registry Metadata and Deprecation Notices Server"
+     }
+   }
+ }
