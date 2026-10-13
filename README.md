@@ -1,35 +1,47 @@
-# Week 9 Practical — Task Set E: Bolt on the Package-Registry Server
+# Week 10 Engineering Challenge: Multi-Agent Systems & Agent-to-Agent (A2A) Protocols
 
 ## Overview
-- **Domain:** Developer Documentation
-- **Week:** 9 — MCP — The Standard Way Agents Reach Tools & Data
-- **Module:** M5 — MCP, Multi-agent & A2A
-- **Core Objective:** Prove dynamic tool discovery by bolting on DevRel's `package-registry` MCP server with zero code changes in the agent module.
+- **Domain:** Developer Documentation & SDK Migration
+- **Week:** 10 — Multi-Agent Systems & Agent-to-Agent (A2A) Protocols
+- **Module:** M5 — MCP, Multi-Agent & A2A
+- **Core Objective:** Conduct an honest, telemetry-backed experiment: build a **Manager-Plus-Two-Specialists Team** (Orchestrator delegating to a `VersionDeprecationWorker` and a `CodeSampleWorker`) and race it head-to-head against the **Single Agent** across 10 evaluation test cases.
 
 ---
 
-## Deliverables & Submission Checklist
+## Deliverables & Artifacts Matrix
 
-| Item | File | Description |
+| Deliverable | File | Description |
 | :--- | :--- | :--- |
-| **1. Agent Diff** | [`agent_diff.txt`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/agent_diff.txt) | Proves **ZERO lines changed** in `src/agent.py` between server 1 and server 1+2. |
-| **2. Config Diff** | [`config_diff.txt`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/config_diff.txt) | Shows the configuration diff adding the second server (`mcp_config.json`). |
-| **3. Wire Protocol** | [`wire.json`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/wire.json) | Hand-annotated raw JSON-RPC `initialize` -> `tools/list` -> `tools/call` capture and model-call statement. |
-| **4. Tool Count Line** | Console & Summary | `3 before -> 6 after, with tool names: [search_docs, get_openapi_spec, check_symbol_deprecation] -> [search_docs, get_openapi_spec, check_symbol_deprecation, get_package_versions, get_deprecation_notice, get_release_metadata]` |
-| **5. Error Recovery** | [`error_before_after.md`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/error_before_after.md) | Docstring rewritten as prompt and before/after transcript of model recovering from failed version lookup. |
-| **6. Supply-Chain Risk** | [`risk_note.md`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/risk_note.md) | Exactly 5 lines answering who wrote it, what it reaches, what it logs, what a stolen token could do, and ship/don't. |
-| **7. Bonus Gateway** | [`src/mcp/gateway.py`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/src/mcp/gateway.py) | Front-door gateway with fan-out, single-line audit logging, and scoped token authorization. |
+| **1. Race Table** | [`race_table.md`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/race_table.md) | Head-to-head comparison of 4 metrics $\times$ 2 arms across the 10 evaluation test cases. |
+| **2. Delegation Handoff Log** | [`handoffs.log`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/handoffs.log) | Structured log recording every agent-to-agent hop, input/output tokens, cost, latency, and status. |
+| **3. Context Multiplier & Bottleneck** | In `race_table.md` & console | Context Re-Send Multiplier ($1.6\times$) and dominant handoff step identified (`orchestrator -> code-sample worker resend`, 53.5% of tokens). |
+| **4. Injected Failure Report** | [`failure_case.md`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/failure_case.md) | Detailed analysis of injected HTTP 500 error on Worker 1, verifying retry loop, graceful degradation, and hallucination prevention. |
+| **5. KEEP or KILL Decision** | [`verdict.md`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/verdict.md) | Exactly 10 lines, citing $\ge 2$ telemetry numbers, explicitly naming and rejecting sunk-cost bias. |
+| **6. AgentCard Specification** | [`agent_card.json`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/agent_card.json) | Capabilities, input/output JSON schemas, and Bearer token auth interface contract for the Orchestrator. |
+| **7. A2A Protocol & State Machine** | [`a2a_protocol.md`](file:///c:/Users/uttam/Documents/GIT%20PROJECTS/ai-learning/a2a_protocol.md) | State diagram mapping HTTP 500 onto `PAUSED: input-required` lifecycle and a 2-line Protocol Value statement. |
 
 ---
 
-## Quick Start & Running the Output File
+## 4 Core Telemetry Metrics (Head-to-Head Race)
 
-To run the complete Week 9 suite:
+| Metric | Single Agent (Arm A) | Orchestrator Squad (Arm B) | Performance Delta |
+| :--- | :---: | :---: | :---: |
+| **Pass Rate (%)** | **100.0%** | **100.0%** | **0.0%** (Identical functional accuracy) |
+| **p50 Latency (s)** | **0.0012s** | **0.0019s** | **1.5x slower** (+54.2%) |
+| **p99 Latency (s)** | **0.0015s** | **0.0021s** | **1.4x slower** |
+| **Total Tokens** | **11,194** | **17,412** | **1.6x Context Re-Send Multiplier** |
+| **Cost Per Question ($)** | **$0.001769** | **$0.002772** | **+56.7% cost explosion** |
+
+---
+
+## Quick Start & Verification
+
+### 1. Run the Head-to-Head Race & Generate All Artifacts
 ```bash
-python run_week9.py
+python run_week10.py
 ```
 
-To run automated unit tests:
+### 2. Run Automated Regression Test Suite
 ```bash
-python tests/test_week9.py
+python tests/test_week10.py
 ```

@@ -1,8 +1,0 @@
-[2026-10-04 17:14:51Z] [AUDIT] caller=docs-assistant | tool=get_package_versions | target=ai-sdk@v3 | status=ALLOWED
-[2026-10-04 17:14:51Z] [AUDIT] caller=docs-assistant | tool=get_deprecation_notice | target=ai-sdk@v2.0.0 | status=DENIED (Insufficient scope: requires 'read:deprecations')
-[2026-10-04 17:15:02Z] [AUDIT] caller=test-agent | tool=get_package_versions | target=ai-sdk@v3 | status=ALLOWED
-[2026-10-04 17:15:02Z] [AUDIT] caller=test-agent | tool=get_deprecation_notice | target=ai-sdk@v2.0.0 | status=DENIED (Insufficient scope: requires 'read:deprecations')
-[2026-10-04 17:15:23Z] [AUDIT] caller=test-agent | tool=get_package_versions | target=ai-sdk@v3 | status=ALLOWED
-[2026-10-04 17:15:23Z] [AUDIT] caller=test-agent | tool=get_deprecation_notice | target=ai-sdk@v2.0.0 | status=DENIED (Insufficient scope: requires 'read:deprecations')
-[2026-10-04 17:15:36Z] [AUDIT] caller=docs-assistant | tool=get_package_versions | target=ai-sdk@v3 | status=ALLOWED
-[2026-10-04 17:15:36Z] [AUDIT] caller=docs-assistant | tool=get_deprecation_notice | target=ai-sdk@v2.0.0 | status=DENIED (Insufficient scope: requires 'read:deprecations')

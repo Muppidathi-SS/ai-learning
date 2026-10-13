@@ -1,0 +1,72 @@
+[
+  {
+    "id": "q1",
+    "question": "How do I migrate my v2 Client.send call to v3 with the updated retry backoff and timeout parameters?",
+    "current_version": "v2",
+    "target_version": "v3",
+    "primary_symbol": "Client.send"
+  },
+  {
+    "id": "q2",
+    "question": "We are upgrading Auth.login from v2 to v3. What is the new endpoint and token expiration parameter?",
+    "current_version": "v2",
+    "target_version": "v3",
+    "primary_symbol": "Auth.login"
+  },
+  {
+    "id": "q3",
+    "question": "Migrate Stream.feed to v3: Check if the v3 OpenAPI spec upgrades to WebSockets (status 101); if so, subscribe with keep-alive heartbeat pings, otherwise use polling.",
+    "current_version": "v2",
+    "target_version": "v3",
+    "primary_symbol": "Stream.feed"
+  },
+  {
+    "id": "q4",
+    "question": "Migrate Batch.dispatch to v3: Inspect the OpenAPI spec for /v3/batch/submit_jobs. If auto_retry_failed parameter is supported in the spec, configure auto retry with max concurrency 10; otherwise implement client retries.",
+    "current_version": "v2",
+    "target_version": "v3",
+    "primary_symbol": "Batch.dispatch"
+  },
+  {
+    "id": "q5",
+    "question": "Migrate Config.get_config to v3: Check if OpenAPI spec supports strict_validation and env_override. If supported, load settings with strict validation enabled.",
+    "current_version": "v2",
+    "target_version": "v3",
+    "primary_symbol": "Config.get_config"
+  },
+  {
+    "id": "q6",
+    "question": "How should Webhook.subscribe be migrated to v3 Webhook.register_listener, and what signature algorithm is required?",
+    "current_version": "v2",
+    "target_version": "v3",
+    "primary_symbol": "Webhook.subscribe"
+  },
+  {
+    "id": "q7",
+    "question": "In v2 we had Client.send with timeout_s=60. Does v3 reduce the default timeout, and how should we configure it?",
+    "current_version": "v2",
+    "target_version": "v3",
+    "primary_symbol": "Client.send"
+  },
+  {
+    "id": "q8",
+    "question": "Stream migration: Inspect whether v3 stream endpoint accepts buffer limits in the OpenAPI spec before subscribing to the telemetry channel.",
+    "current_version": "v2",
+    "target_version": "v3",
+    "primary_symbol": "Stream.feed"
+  },
+  {
+    "id": "q9",
+    "question": "Batch jobs migration: Verify if the v3 batch endpoint accepts job_list or payloads array in the OpenAPI spec before submitting tasks.",
+    "current_version": "v2",
+    "target_version": "v3",
+    "primary_symbol": "Batch.dispatch"
+  },
+  {
+    "id": "q10",
+    "question": "Auth session token migration: Confirm if /v3/auth/token endpoint in OpenAPI spec provides bearer token scopes and what the TTL default is.",
+    "current_version": "v2",
+    "target_version": "v3",
+    "primary_symbol": "Auth.login"
+  }
+]
