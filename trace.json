@@ -1,0 +1,56 @@
+{
+  "trace_id": "tr_prod_20261016_8831f4",
+  "timestamp": "2026-10-16T14:22:18.412Z",
+  "user_id": "usr_dev_4821",
+  "query": "How do I connect and consume real-time telemetry updates in Python?",
+  "status_code": 200,
+  "prompt_version": "v1.2.0",
+  "retrieved_context_ids": [
+    "v2_stream_v2_struct_000",
+    "v2_stream_v2_struct_001"
+  ],
+  "output_text": "Here is how you consume live telemetry events using the Stream interface:\n```python\nfrom sdk import Stream\n\n# Connect to live real-time telemetry events\nstream = Stream.feed(channel=\"telemetry\", buffer_len=1024, ping_interval=5000)\nfor event in stream:\n    process(event)\n```\nThis feeds real-time updates directly into your processing pipeline.",
+  "output_code": "from sdk import Stream\n\n# Connect to live real-time telemetry events\nstream = Stream.feed(channel=\"telemetry\", buffer_len=1024, ping_interval=5000)\nfor event in stream:\n    process(event)\n",
+  "spans": {
+    "retrieval": {
+      "span_id": "tr_prod_20261016_8831f4-ret",
+      "name": "vector_retrieval",
+      "latency_ms": 124.5,
+      "input_tokens": 16,
+      "output_tokens": 412,
+      "cost_usd": 0.00062,
+      "context_chunk_ids": [
+        "v2_stream_v2_struct_000",
+        "v2_stream_v2_struct_001"
+      ]
+    },
+    "generation": {
+      "span_id": "tr_prod_20261016_8831f4-gen",
+      "name": "llm_code_synthesis",
+      "latency_ms": 1180.2,
+      "prompt_tokens": 580,
+      "completion_tokens": 145,
+      "cost_usd": 0.00116,
+      "prompt_version": "v1.2.0"
+    },
+    "tools": {
+      "span_id": "tr_prod_20261016_8831f4-tool",
+      "name": "deprecation_checker",
+      "latency_ms": 45.3,
+      "cost_usd": 0.0,
+      "tool_calls": [
+        "check_deprecation"
+      ]
+    }
+  },
+  "total_latency_ms": 1350.0,
+  "total_tokens": 741,
+  "total_cost_usd": 0.00178,
+  "emitted_symbols": [
+    "Stream.feed",
+    "buffer_len",
+    "ping_interval",
+    "process"
+  ],
+  "deprecated_symbol_emitted": true
+}
