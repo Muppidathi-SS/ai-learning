@@ -1,7 +1,13 @@
 """
-Server 1: Docs Search MCP Server (Developer Documentation Server).
-Exposes tools for searching markdown guides, OpenAPI endpoint schemas, and symbol deprecations.
-Demonstrates Requirement 5: Docstring rewritten as a prompt with actionable, recoverable error paths.
+src/mcp/docs_server.py
+======================
+MCP Server exposing genuine SDK capabilities:
+1. version_scoped_doc_search: Searches markdown docs scoped strictly to caller's version.
+2. changelog_deprecation_lookup: Looks up deprecation notices and removal versions.
+3. symbol_exists_check: Performs AST/symbol-table verification against target version.
+
+Discovered at runtime by the agent via standard JSON-RPC 2.0 initialize -> tools/list.
+Can be invoked live by external clients (e.g. Thursday's fresh-eyes reviewer).
 """
 
 import json
@@ -9,36 +15,25 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from src.mcp.protocol import McpServerBase
+from src.retriever import VersionScopedRetriever
+from src.symbol_validator import SymbolTableValidator
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent.parent
 DATA_DIR = PROJECT_ROOT / "data"
-OPENAPI_SPECS_PATH = DATA_DIR / "openapi_specs.json"
 DEPRECATIONS_PATH = DATA_DIR / "deprecations.json"
 
 
-# Docstring Comparison for Requirement 5
-OLD_SEARCH_DOCS_DOCSTRING = "Search prose documentation for keywords and concepts. Returns error if version directory is not found."
+class SdkDocsMcpServer(McpServerBase):
+    """
+    Standard MCP Server for SDK Documentation, Deprecation Registry, and Symbol Validation.
+    """
 
-REWRITTEN_SEARCH_DOCS_PROMPT_DOCSTRING = (
-    "Search developer documentation, migration guides, and code examples for SDK usage patterns. "
-    "Call this tool whenever verifying endpoint changes or generating migration code. "
-    "If a queried version does not exist, inspect the returned recovery guidance for the latest "
-    "published active release (v3.2) and migration changelogs before generating code. "
-    "Do not hallucinate methods for unreleased versions."
-)
-
-
-class DocsSearchMcpServer(McpServerBase):
-    def __init__(self, mode: str = "new"):
-        super().__init__(server_name="docs-search-server", version="1.2.0")
-        self.mode = mode  # "old" (uninformative error) vs "new" (recoverable error)
+    def __init__(self):
+        super().__init__(server_name="sdk-docs-server", version="2.0.0")
+        self.retriever = VersionScopedRetriever()
+        self.symbol_validator = SymbolTableValidator()
+        self.deprecations = self._load_deprecations()
         self._setup_tools()
-
-    def _load_openapi_specs(self) -> Dict[str, Any]:
-        if OPENAPI_SPECS_PATH.exists():
-            with open(OPENAPI_SPECS_PATH, "r", encoding="utf-8") as f:
-                return json.load(f)
-        return {}
 
     def _load_deprecations(self) -> List[Dict[str, Any]]:
         if DEPRECATIONS_PATH.exists():
@@ -47,152 +42,154 @@ class DocsSearchMcpServer(McpServerBase):
         return []
 
     def _setup_tools(self):
-        docstring = REWRITTEN_SEARCH_DOCS_PROMPT_DOCSTRING if self.mode == "new" else OLD_SEARCH_DOCS_DOCSTRING
-
-        # 1. search_docs
+        # Tool 1: version_scoped_doc_search
         self.register_tool(
-            name="search_docs",
-            description=docstring,
+            name="version_scoped_doc_search",
+            description=(
+                "Search SDK prose documentation and markdown guides strictly filtered by the caller's target version. "
+                "Returns version-tagged clickable citations and matching content snippets."
+            ),
             input_schema={
                 "type": "object",
                 "properties": {
-                    "query": {"type": "string", "description": "Search query keywords or method name"},
-                    "version": {"type": "string", "description": "Target API version (e.g. 'v1', 'v2', 'v3', 'v4')"},
+                    "query": {"type": "string", "description": "Keywords or method name to search"},
+                    "version": {"type": "string", "description": "Target SDK version (e.g. 'v2', 'v2.4', 'v3', 'v3.0')"},
                 },
                 "required": ["query", "version"],
             },
-            handler=self.search_docs,
+            handler=self.version_scoped_doc_search,
         )
 
-        # 2. get_openapi_spec
+        # Tool 2: changelog_deprecation_lookup
         self.register_tool(
-            name="get_openapi_spec",
-            description="Retrieve OpenAPI schema specification details including HTTP method, path, input parameters, and responses.",
+            name="changelog_deprecation_lookup",
+            description=(
+                "Query migration changelog and deprecation registry to check if an API symbol has been deprecated "
+                "or removed in a future version. Returns replacement symbol and sunset version."
+            ),
             input_schema={
                 "type": "object",
                 "properties": {
-                    "endpoint": {"type": "string", "description": "API path or endpoint string e.g. /v3/client/send"},
-                    "version": {"type": "string", "description": "API specification version e.g. 'v1', 'v2', 'v3'"},
+                    "symbol": {"type": "string", "description": "Class or method name e.g. 'Client.query' or 'Stream.feed'"},
+                    "current_version": {"type": "string", "description": "Current SDK version the caller is using"},
                 },
-                "required": ["endpoint", "version"],
+                "required": ["symbol"],
             },
-            handler=self.get_openapi_spec,
+            handler=self.changelog_deprecation_lookup,
         )
 
-        # 3. check_symbol_deprecation
+        # Tool 3: symbol_exists_check
         self.register_tool(
-            name="check_symbol_deprecation",
-            description="Query SDK migration changelog and deprecation registry to check if a symbol has been deprecated and find replacements.",
+            name="symbol_exists_check",
+            description=(
+                "Check whether a class or method exists in the symbol table for a specific SDK version. "
+                "Returns boolean exists, parameters, and mandatory rules (e.g. timeout in v3.0 Client.search)."
+            ),
             input_schema={
                 "type": "object",
                 "properties": {
-                    "symbol": {"type": "string", "description": "Class method or API symbol name e.g. Client.send or Auth.login"},
-                    "version": {"type": "string", "description": "Source API version"},
+                    "symbol": {"type": "string", "description": "Fully-qualified symbol name e.g. 'Client.query' or 'Client.search'"},
+                    "version": {"type": "string", "description": "SDK version to check against e.g. 'v2' or 'v3'"},
                 },
                 "required": ["symbol", "version"],
             },
-            handler=self.check_symbol_deprecation,
+            handler=self.symbol_exists_check,
         )
 
-    def search_docs(self, query: str, version: str) -> Dict[str, Any]:
-        clean_v = version.strip().lower()
-        target_dir = DATA_DIR / clean_v
-
-        # Unknown / unreleased version path (Demonstrates Requirement 5)
-        if not target_dir.exists():
-            if self.mode == "old":
-                # Old uninformative error: model cannot recover
-                return {
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": f"Error 3: Documentation directory not found for version '{version}'",
-                        }
-                    ],
-                    "isError": True,
-                }
-            else:
-                # New recoverable error: guides model to latest published version (v3.2)
-                return {
-                    "content": [
-                        {
-                            "type": "text",
-                            "text": (
-                                f"No documentation found for requested version '{version}'. "
-                                f"The latest published active version is 'v3.2'. "
-                                f"Deprecated methods and migration paths from v2 to v3 are documented under 'v3/migration' and 'v3/client_v3.txt'. "
-                                f"Actionable Recovery: Please retry your query targeting version 'v3' or refer to 'v3.2' migration guides."
-                            ),
-                        }
-                    ],
-                    "isError": True,
-                }
-
-        # Search matching files
-        matches = []
-        tokens = [t.lower() for t in query.split() if len(t) > 2]
-        for file_path in target_dir.glob("*.*"):
-            if file_path.suffix in [".txt", ".md"]:
-                content = file_path.read_text(encoding="utf-8", errors="ignore")
-                content_lower = content.lower()
-                score = sum(content_lower.count(t) for t in tokens)
-                if score > 0 or any(p in file_path.name.lower() for p in tokens):
-                    matches.append({
-                        "file": file_path.name,
-                        "snippet": content[:400].strip(),
-                    })
-
-        matches.sort(key=lambda x: len(x["snippet"]), reverse=True)
+    def version_scoped_doc_search(self, query: str, version: str) -> Dict[str, Any]:
+        results = self.retriever.search(query, target_version=version, top_k=3)
         return {
-            "content": [
+            "query": query,
+            "version": version,
+            "count": len(results),
+            "results": [
                 {
-                    "type": "text",
-                    "text": json.dumps({
-                        "status": "success",
-                        "version": clean_v,
-                        "query": query,
-                        "count": len(matches),
-                        "results": matches[:2],
-                    }, indent=2),
+                    "file": r["file"],
+                    "version_label": r["version_label"],
+                    "citation": r["citation"],
+                    "snippet": r["content"][:400].strip(),
                 }
+                for r in results
             ],
-            "isError": False,
         }
 
-    def get_openapi_spec(self, endpoint: str, version: str) -> Dict[str, Any]:
-        clean_v = version.strip().lower()
-        specs = self._load_openapi_specs().get(clean_v, {})
-        clean_ep = endpoint.strip()
+    def changelog_deprecation_lookup(self, symbol: str, current_version: str = "v2") -> Dict[str, Any]:
+        sym_clean = symbol.strip().lower()
+        matched = []
+        for dep in self.deprecations:
+            d_sym = dep.get("symbol", "").lower()
+            if sym_clean in d_sym or d_sym in sym_clean:
+                matched.append(dep)
 
-        if clean_ep in specs:
+        if matched:
             return {
-                "content": [{"type": "text", "text": json.dumps({"endpoint": clean_ep, "spec": specs[clean_ep]}, indent=2)}],
-                "isError": False,
+                "status": "deprecation_found",
+                "symbol": symbol,
+                "current_version": current_version,
+                "deprecations": matched,
+            }
+        return {
+            "status": "active_symbol",
+            "symbol": symbol,
+            "current_version": current_version,
+            "message": f"No deprecation notices found for '{symbol}'.",
+        }
+
+    def symbol_exists_check(self, symbol: str, version: str) -> Dict[str, Any]:
+        norm_v = "v3" if "3" in version else "v2"
+        v_table = self.symbol_validator.symbol_table.get(norm_v, {}).get("classes", {})
+
+        parts = symbol.strip().split(".")
+        class_name = parts[0]
+        method_name = parts[1] if len(parts) > 1 else None
+
+        if class_name not in v_table:
+            return {
+                "symbol": symbol,
+                "version": norm_v,
+                "exists": False,
+                "reason": f"Class '{class_name}' does not exist in SDK {norm_v}.",
             }
 
-        # Partial match
-        for ep, data in specs.items():
-            if clean_ep in ep or any(part in ep for part in clean_ep.split("/") if part):
+        if method_name:
+            methods = v_table[class_name].get("methods", {})
+            if method_name not in methods:
+                # Check if it was removed in v3
+                if norm_v == "v3" and method_name in ["query", "feed", "dispatch", "login", "get_config", "subscribe"]:
+                    return {
+                        "symbol": symbol,
+                        "version": norm_v,
+                        "exists": False,
+                        "removed_in_v3": True,
+                        "reason": f"Method '{symbol}' no longer exists in {norm_v}. It was removed in v3.0.",
+                    }
                 return {
-                    "content": [{"type": "text", "text": json.dumps({"endpoint": ep, "spec": data}, indent=2)}],
-                    "isError": False,
+                    "symbol": symbol,
+                    "version": norm_v,
+                    "exists": False,
+                    "reason": f"Method '{method_name}' does not exist in {class_name} for SDK {norm_v}.",
                 }
 
+            spec = methods[method_name]
+            return {
+                "symbol": symbol,
+                "version": norm_v,
+                "exists": True,
+                "parameters": spec.get("parameters", []),
+                "required": spec.get("required", []),
+                "notes": spec.get("notes", ""),
+                "deprecated_in": spec.get("deprecated_in"),
+                "removed_in": spec.get("removed_in"),
+                "migration": spec.get("migration"),
+            }
+
         return {
-            "content": [{"type": "text", "text": f"Endpoint '{clean_ep}' not found in {clean_v} OpenAPI specification."}],
-            "isError": True,
+            "symbol": symbol,
+            "version": norm_v,
+            "exists": True,
+            "methods": list(v_table[class_name].get("methods", {}).keys()),
         }
 
-    def check_symbol_deprecation(self, symbol: str, version: str) -> Dict[str, Any]:
-        clean_v = version.strip().lower()
-        deprecations = self._load_deprecations()
-        q_sym = symbol.strip().lower()
-        found = []
-        for d in deprecations:
-            if q_sym in d.get("symbol", "").lower():
-                found.append(d)
 
-        return {
-            "content": [{"type": "text", "text": json.dumps({"symbol": symbol, "found": found}, indent=2)}],
-            "isError": False,
-        }
+# Backwards compatibility export
+DocsSearchMcpServer = SdkDocsMcpServer

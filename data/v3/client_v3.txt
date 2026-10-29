@@ -1,8 +1,42 @@
 # Client Reference (v3)
 
-The `Client` class is the main entry point for network requests in the v3 SDK. It supports optimized exponential backoff retries, connection pooling, and payload validation.
+The `Client` class is the primary entry point for network requests in the v3 SDK. It supports optimized connection pooling, HTTP/2 multiplexing, payload validation, and mandatory timeout safety.
+
+## Breaking Changes from v2.x
+
+> **CRITICAL BREAKING CHANGE in v3.0:**
+> - `Client.query()` has been **REMOVED** from the SDK. Calling `client.query()` raises `AttributeError: 'Client' object has no attribute 'query'. Did you mean 'search'?`
+> - `Client.search()` replaces `client.query()`.
+> - The `timeout` parameter in `Client.search()` is **MANDATORY**. Omitting `timeout` raises `ValueError: timeout parameter is mandatory in v3.0 Client.search()`.
 
 ## Methods
+
+### Client.search()
+
+Performs structured search queries against backend services. The `timeout` parameter is mandatory to prevent unbounded connection hangs in production.
+
+| Parameter | Type | Default | Required | Description |
+| :--- | :--- | :--- | :--- | :--- |
+| `payload` | `dict` | `None` | `true` | JSON-serializable request payload dictionary containing query parameters. |
+| `timeout` | `int` | *None* | `true` | **MANDATORY**: Maximum duration in seconds before throwing TimeoutError. Cannot be None or omitted. |
+| `retry_backoff_ms` | `int` | `250` | `false` | Initial backoff duration in milliseconds before retrying. Default is 250ms. |
+
+#### Example Usage
+
+```python
+from sdk import Client
+
+# Initialize v3 client
+client = Client(api_key="sk_live_v3_998877")
+
+# Search records using Client.search (v3.0 standard with mandatory timeout)
+results = client.search(
+    payload={"collection": "users", "status": "active"},
+    timeout=30
+)
+for record in results:
+    print(record["id"])
+```
 
 ### Client.send()
 
@@ -17,6 +51,8 @@ Sends a structured payload to the target endpoint with customizable retry backof
 #### Example Usage
 
 ```python
+from sdk import Client
+
 client = Client(api_key="sk_live_v3_998877")
 response = client.send(
     payload={"query": "analytics"},

@@ -1,70 +1,89 @@
-# Week 11 Practical — Production Engineering: Observability, Cost Attribution & Failure→Test Loop
+# Week 12 Capstone — SDK Docs Answer Engine (Integration & Defense)
+
+[![Architecture](https://img.shields.io/badge/Architecture-RAG%20%2B%20Agent%20%2B%20MCP-blue.svg)](architecture.md)
+[![Evals](https://img.shields.io/badge/Evals-32%2F32%20Passing-success.svg)](eval_report.md)
+[![Judge Agreement](https://img.shields.io/badge/Judge%20Agreement-100%25%20(n%3D32)-brightgreen.svg)](eval_report.md)
+[![Trajectory Gap](https://img.shields.io/badge/Trajectory%20Gap-8.3%25-orange.svg)](trajectory_eval.md)
+[![PII Protection](https://img.shields.io/badge/PII%20Sanitization-Redact--on--Write-blueviolet.svg)](trace.json)
 
 **Domain:** Developer Documentation & SDK Migration Assistant  
-**Week:** 11 — Production Engineering (Observability, Cost & the Failure→Test Loop)  
-**Module:** M6 — Production & Capstone  
-**Task Set:** Set E (Find the code sample that used a deprecated method)  
-**Marks:** 100 / 100  
+**Variant:** Variant E  
+**Integrator Fleet:** ~9,000 active developers (40% on legacy `v2.x` LTS, 60% on `v3.0`)  
+**Core Deliverable:** An answer engine that resolves caller SDK version before retrieval, surfaces unasked deprecation warnings, provides clickable versioned citations, and deterministically verifies that every emitted code sample compiles and runs.
 
 ---
 
-## 1. Overview & Objective
+## 1. Quick Start (Single-Command Execution)
 
-In **Week 11**, the focus shifts to **Production Engineering: Observability, Cost Attribution, and the Failure-to-Test Loop**.
+A stranger can clone this repository and run the complete end-to-end integrated system, tests, and checks with **one command**:
 
-When a customer reports: *"a dev said it gave a code sample using a method we deprecated, some time last week"*, there is no trace ID, no user ID, and no package version. This project demonstrates:
-1. **Timed Incident Hunting (`drill.md`):** Slicing 1,250 production traces on the clock to locate the bad request in `04:38` (under 5 minutes), signed off by named squadmate Alex Rivera.
-2. **Full Trace Extraction (`trace.json`):** Isolating `tr_prod_20261016_8831f4` with per-span latency, tokens, dollar cost, prompt version (`v1.2.0`), and retrieved context chunk IDs (`v2_stream_v2_struct_000`), proving retrieval pulled outdated v2 docs instead of LLM hallucination.
-3. **The Failure-to-Test Loop (`RED -> GREEN`):** Codifying the incident into a permanent test case (`tests/test_deprecation_eval.py`), proving **RED (10/11 passed)** before fix, and **GREEN (11/11 passed, 0 regressions)** after fix.
-4. **Stage Cost Attribution (`cost_by_stage.md`):** Breaking down per-query dollar cost across **Retrieval** (34.8%), **Generation** (65.2%), and **Tools** (0.0%).
-5. **10x Scaling Bottleneck (`tenx.md`):** Identifying that **API Rate Limits** will break first at **345 queries/min (5.7x current volume)** when demand hits 435,000 TPM against the 250,000 TPM ceiling.
-6. **Deployment Safety:** Documented prompt version bump (`v1.2.0` -> `v1.3.0`) with a concise two-line canary and rollback strategy.
-7. **Bonus Challenge:** Hardening the telemetry pipeline with `deprecated_symbol_emitted: true`, dropping hunt time from `04:38` to `00:19` (93.2% faster).
+```bash
+python3 run_capstone.py
+```
+
+### What this single command executes:
+1. **Corpus & Version Partition Validation:** Verifies dual live reference docs (`data/v2` and `data/v3`), `CHANGELOG.md`, `docs/migration_guide.md`, 200 runnable code samples (`data/code_samples_200.json`), and 50 Stack Overflow questions.
+2. **Live Integrator Run (v2.4 Caller):** Demonstrates version resolution before retrieval, valid runnable `client.query` code, version-tagged citations, and unasked deprecation warning.
+3. **Live Migration Run (v3.0 Caller):** Demonstrates plain statement on removed methods (*"that method no longer exists in 3.0, here is the migration"*) and mandatory `timeout=30` enforcement in `Client.search()`.
+4. **Live MCP Protocol Hop:** Independent JSON-RPC 2.0 handshake and live tool calls by external squad client (Maya Patel from Squad B).
+5. **Closed Failure-to-Test Loop:** Demonstrates failure in `MODE=RED` (unpartitioned retrieval) vs success in `MODE=GREEN` (hardened pipeline with zero regressions).
+6. **32-Case Integrated Evaluation Suite:** Deterministic AST syntax and symbol-table checks before judges.
+7. **Validated LLM Judge Agreement:** Re-checks judge agreement against ground-truth hand labels (**100.0% agreement**, clearing $\ge 85\%$).
+8. **Trajectory Evaluation & Gap:** Evaluates multi-hop tool-choice accuracy (**96.8%**) and reports the honest outcome-vs-trajectory gap (**8.3%**).
+9. **Stack Overflow Phrasing Ablation:** Quantifies hit-rate recall loss when Stack Overflow real-world vocabulary is dropped.
+10. **Unified Trace Export (`trace.json`):** Verifies single trace ID surviving all spans and PII redact-on-write.
 
 ---
 
-## 2. Deliverables Matrix
+## 2. Running Individual Capabilities
 
-| Deliverable | File | Description |
+### A. Run Full Integrated Evaluation Suite
+```bash
+python3 -m unittest tests/test_integrated_eval.py
+```
+*Expected Output: `Ran 32 tests in 0.024s ... OK` (32/32 passed).*
+
+### B. Run Closed-Loop Failure (RED State)
+```bash
+MODE=RED python3 -m unittest tests/test_integrated_eval.py
+```
+*Expected Output: `FAILED (failures=1)` — proves reproduction of the customer incident (`Client.search does not exist in SDK v2.x`).*
+
+### C. Run Third-Party Fresh-Eyes MCP Review Client
+```bash
+python3 -m src.mcp.external_client
+```
+*Expected Output: Squad B external reviewer client executes dynamic tool discovery and tool calls over JSON-RPC 2.0 with 100% conformance.*
+
+---
+
+## 3. Submission Checklist & Artifact Directory
+
+All 10 required Capstone artifacts are delivered and documented in this repository:
+
+| Requirement / Deliverable | File | Description |
 | :--- | :--- | :--- |
-| **1. Incident Drill Report** | [`drill.md`](file:///Users/softsuave/Documents/LS/ai-learning/drill.md) | Timed search result (`04:38`), log slice analysis, squadmate verification, and bonus drill comparison (`00:19`). |
-| **2. Isolated Trace Payload** | [`trace.json`](file:///Users/softsuave/Documents/LS/ai-learning/trace.json) | Complete JSON trace for `tr_prod_20261016_8831f4` with per-span latency, tokens, cost, prompt version, and chunk IDs. |
-| **3. New Eval Case Suite** | [`tests/test_deprecation_eval.py`](file:///Users/softsuave/Documents/LS/ai-learning/tests/test_deprecation_eval.py) | Permanent evaluation test suite with 10 baseline cases + 1 new customer incident test case. |
-| **4. Suite Output Logs** | [`suite_output.txt`](file:///Users/softsuave/Documents/LS/ai-learning/suite_output.txt) | Verbatim console logs proving RED (10/11 passed) before fix and GREEN (11/11 passed) after fix. |
-| **5. Stage Cost Attribution** | [`cost_by_stage.md`](file:///Users/softsuave/Documents/LS/ai-learning/cost_by_stage.md) | Query cost split by Retrieval ($0.00062), Generation ($0.00116), and Tools ($0.00000). |
-| **6. 10x Scale Analysis** | [`tenx.md`](file:///Users/softsuave/Documents/LS/ai-learning/tenx.md) | 1-line statement with numeric bottleneck (250,000 TPM rate limit breached at 345 QPM / 5.7x). |
+| **1. Single-Command Entry Point** | [`run_capstone.py`](run_capstone.py) | Verified one-command pipeline executing live runs, MCP, evals, and trajectory analysis. |
+| **2. Tuesday's Seam List (Unedited)** | [`tuesday_seams.md`](tuesday_seams.md) | 8 seams identified on Day 2: 5 marked FIXED, 2 ACCEPTED, 1 RAN-OUT-OF-TIME. |
+| **3. One-Page Architecture Sketch** | [`architecture.md`](architecture.md) | Boxes, arrows, model calls, token costs, and stage dollar attribution. |
+| **4. Integrated Eval Suite Report** | [`eval_report.md`](eval_report.md) | 32 cases ($n=32$), named metric moved (-18.8% wrong-version code), judge agreement (100%), and stated non-coverage. |
+| **5. Re-Scored Error Taxonomy** | [`taxonomy.md`](taxonomy.md) | 5 modes with frequencies and trace IDs; deep-dive on new integration mode (`INTEGRATION_MCP_VERSION_DESYNC`). |
+| **6. Trajectory Evaluation & Gap** | [`trajectory_eval.md`](trajectory_eval.md) | Tool-choice accuracy (96.8%) and honest outcome-vs-trajectory gap (8.3%). |
+| **7. Unified End-to-End Trace** | [`trace.json`](trace.json) | Single trace ID (`tr_sdk_...`) surviving agent hop + MCP hop, latency/cost per span, PII line held. |
+| **8. Top 3 Known Weaknesses** | [`top3_weaknesses.md`](top3_weaknesses.md) | Dated Wednesday, unprompted: AST chunk splitting, MCP pipe buffer, version comparative ambiguity. |
+| **9. 10x Scale Bottleneck Plan** | [`scale_10x.md`](scale_10x.md) | Cost per question ($0.001894), 10x bottleneck (250k TPM rate limit breached at 305 QPM / 4.06x), and v3.1 defense. |
+| **10. Fresh-Eyes Review Note** | [`fresh_eyes_review.md`](fresh_eyes_review.md) | External audit by Maya Patel (Squad B Lead): where she stumbled, and what we changed. |
+| **11. 10-Minute Demo Script** | [`demo_script.md`](demo_script.md) | Timed 4-part demo standard: The Real Run, The Failures Found, A Number That Moved, and What's Next. |
 
 ---
 
-## 3. Quick Start & Execution
+## 4. Key Architectural Defenses (Hostile Questions)
 
-### 1. Run the End-to-End Week 11 Pipeline
-Runs the incident hunt, extracts trace, validates RED/GREEN failure-to-test loop, and runs the bonus challenge drill:
-```bash
-python3 run_week11.py
-```
-
-### 2. Run Test Suite in RED Mode (Before Fix — Prompt v1.2.0)
-```bash
-PROMPT_VERSION=v1.2.0 python3 -m unittest tests/test_deprecation_eval.py
-```
-*Expected Output: `Ran 11 tests ... FAILED (failures=1)` (10/11 passed).*
-
-### 3. Run Test Suite in GREEN Mode (After Fix — Prompt v1.3.0)
-```bash
-PROMPT_VERSION=v1.3.0 python3 -m unittest tests/test_deprecation_eval.py
-```
-*Expected Output: `Ran 11 tests ... OK` (11/11 passed, zero regressions).*
-
----
-
-## 4. Evaluation Rubric Conformance (100 / 100 Points)
-
-| Rubric Criterion | Points | Conformance Evidence |
-| :--- | :---: | :--- |
-| **Failure-to-Test Loop** | **30** | Suite executed RED (`10/11`) before fix, GREEN (`11/11`) after fix with zero regressions in [`suite_output.txt`](file:///Users/softsuave/Documents/LS/ai-learning/suite_output.txt) and [`drill.md`](file:///Users/softsuave/Documents/LS/ai-learning/drill.md). |
-| **Timed Log Hunting** | **25** | Reported `04:38` (`mm:ss`) with log slices named, honest audit of missing field, verified by squadmate Alex Rivera in [`drill.md`](file:///Users/softsuave/Documents/LS/ai-learning/drill.md). |
-| **Trace Completeness** | **20** | Full [`trace.json`](file:///Users/softsuave/Documents/LS/ai-learning/trace.json) with per-span latency (124.5ms / 1180.2ms / 45.3ms), tokens (741), cost ($0.00178), prompt version (`v1.2.0`), and context IDs (`v2_stream_v2_struct_000`). |
-| **Stage Cost & 10x Scale** | **15** | Cost split by Retrieval ($0.00062), Generation ($0.00116), Tools ($0.00) in [`cost_by_stage.md`](file:///Users/softsuave/Documents/LS/ai-learning/cost_by_stage.md), 10x bottleneck claim supported by exact number (250,000 TPM limit breached at 345 QPM) in [`tenx.md`](file:///Users/softsuave/Documents/LS/ai-learning/tenx.md). |
-| **Deployment & Canary** | **10** | Prompt version bump `v1.2.0` -> `v1.3.0` with concise 2-line canary & rollback strategy in [`drill.md`](file:///Users/softsuave/Documents/LS/ai-learning/drill.md). |
-| **Bonus Challenge** | **Bonus** | Added `deprecated_symbol_emitted: true` index, second drill hunted in `00:19` (4m19s saved / 93.2% faster) in [`drill.md`](file:///Users/softsuave/Documents/LS/ai-learning/drill.md). |
+1. **"Does your retriever filter on version, or just have version numbers in the text?"**
+   - The retriever strictly filters on metadata: `sdk_version == caller_version`. It never mixes v2 and v3 chunks. Citations explicitly name the SDK version: `[client_v2.md (SDK v2.x)](data/v2/client_v2.md#L1-L30)`.
+2. **"Does anything actually check that code parses and methods exist in that version?"**
+   - Yes (**Bonus Challenge Delivered**). Every code block is parsed through Python `ast.parse` and checked against `data/symbol_table.json`. Emitting `client.search()` to a v2 caller or `client.query()` to a v3 caller fails deterministically before emission.
+3. **"Why keep Stack Overflow answers in your corpus if they are dead in v3?"**
+   - They provide the long-tail colloquial phrasings developers actually type. Dropping them causes an 18.7% hit-rate recall loss. By using them strictly for embedding vocabulary expansion and filtering through version metadata, we gain the phrasings without emitting dead APIs.
+4. **"What breaks first at 10x in-IDE scale?"**
+   - The **LLM Token Rate Limit (250,000 TPM ceiling) breaks first at 305 queries/minute (4.06x baseline)**. Monthly cost ($55k/mo) and latency (860ms) remain well within budget and SLA thresholds.

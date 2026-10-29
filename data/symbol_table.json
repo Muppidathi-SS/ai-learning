@@ -1,0 +1,129 @@
+{
+  "v2": {
+    "classes": {
+      "Client": {
+        "methods": {
+          "query": {
+            "parameters": ["payload", "timeout", "retry_backoff_ms"],
+            "required": ["payload"],
+            "deprecated_in": "v2.4",
+            "removed_in": "v3.0",
+            "migration": "Use Client.search() in v3.0 with mandatory timeout parameter."
+          },
+          "send": {
+            "parameters": ["payload", "retry_backoff_ms", "timeout_s"],
+            "required": ["payload"]
+          }
+        }
+      },
+      "Stream": {
+        "methods": {
+          "feed": {
+            "parameters": ["channel", "buffer_len", "ping_interval"],
+            "required": ["channel"],
+            "deprecated_in": "v2.4",
+            "removed_in": "v3.0",
+            "migration": "Use Stream.subscribe() in v3.0 with channel_name and max_buffer_size."
+          }
+        }
+      },
+      "Batch": {
+        "methods": {
+          "dispatch": {
+            "parameters": ["payloads", "concurrency"],
+            "required": ["payloads"],
+            "deprecated_in": "v2.4",
+            "removed_in": "v3.0",
+            "migration": "Use Batch.submit_jobs() in v3.0 with job_list and max_concurrency."
+          }
+        }
+      },
+      "Auth": {
+        "methods": {
+          "login": {
+            "parameters": ["username", "password", "session_expiry"],
+            "required": ["username", "password"],
+            "deprecated_in": "v2.0",
+            "removed_in": "v3.0",
+            "migration": "Use Client.auth(token_ttl_sec=3600) or endpoint /v3/auth/token in v3.0."
+          }
+        }
+      },
+      "Config": {
+        "methods": {
+          "get_config": {
+            "parameters": ["path"],
+            "required": ["path"],
+            "deprecated_in": "v2.4",
+            "removed_in": "v3.0",
+            "migration": "Use Config.load_settings(file_path=..., env_override=True) in v3.0."
+          }
+        }
+      },
+      "Webhook": {
+        "methods": {
+          "subscribe": {
+            "parameters": ["callback_url"],
+            "required": ["callback_url"],
+            "deprecated_in": "v2.4",
+            "removed_in": "v3.0",
+            "migration": "Use Webhook.register_listener(target_url=..., signature_algorithm=...) in v3.0."
+          }
+        }
+      }
+    }
+  },
+  "v3": {
+    "classes": {
+      "Client": {
+        "methods": {
+          "search": {
+            "parameters": ["payload", "timeout", "retry_backoff_ms"],
+            "required": ["payload", "timeout"],
+            "notes": "timeout is MANDATORY in v3.0. Omitting it raises ValueError."
+          },
+          "send": {
+            "parameters": ["payload", "retry_backoff_ms", "timeout_s"],
+            "required": ["payload"]
+          },
+          "auth": {
+            "parameters": ["token_ttl_sec"],
+            "required": []
+          }
+        }
+      },
+      "Stream": {
+        "methods": {
+          "subscribe": {
+            "parameters": ["channel_name", "max_buffer_size", "keep_alive_ping_ms"],
+            "required": ["channel_name"]
+          }
+        }
+      },
+      "Batch": {
+        "methods": {
+          "submit_jobs": {
+            "parameters": ["job_list", "max_concurrency", "auto_retry_failed"],
+            "required": ["job_list"]
+          }
+        }
+      },
+      "Config": {
+        "methods": {
+          "load_settings": {
+            "parameters": ["file_path", "env_override"],
+            "required": ["file_path"]
+          }
+        }
+      },
+      "Webhook": {
+        "methods": {
+          "register_listener": {
+            "parameters": ["target_url", "signature_algorithm"],
+            "required": ["target_url", "signature_algorithm"]
+          }
+        }
+      }
+    }
+  }
+}

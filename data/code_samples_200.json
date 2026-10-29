@@ -1,0 +1,1802 @@
+[
+  {
+    "id": "sample_v2_001",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_1')\nres = client.query(payload={'query': 'user_1', 'limit': 10}, timeout=15)"
+  },
+  {
+    "id": "sample_v2_002",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_2')\nres = client.query(payload={'item_id': 2, 'active': True})"
+  },
+  {
+    "id": "sample_v2_003",
+    "sdk_version": "v2",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_3')\nres = client.send(payload={'event': 'click', 'idx': 3}, retry_backoff_ms=500, timeout_s=60)"
+  },
+  {
+    "id": "sample_v2_004",
+    "sdk_version": "v2",
+    "symbol": "Stream.feed",
+    "class": "Stream",
+    "method": "feed",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.feed(channel='telemetry_4', buffer_len=512, ping_interval=10000)"
+  },
+  {
+    "id": "sample_v2_005",
+    "sdk_version": "v2",
+    "symbol": "Batch.dispatch",
+    "class": "Batch",
+    "method": "dispatch",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.dispatch(payloads=[{'task_id': 5}], concurrency=5)"
+  },
+  {
+    "id": "sample_v2_006",
+    "sdk_version": "v2",
+    "symbol": "Auth.login",
+    "class": "Auth",
+    "method": "login",
+    "runnable": true,
+    "code": "from sdk import Auth\nsession = Auth.login(username='dev_6', password='secret_6', session_expiry=7200)"
+  },
+  {
+    "id": "sample_v2_007",
+    "sdk_version": "v2",
+    "symbol": "Config.get_config",
+    "class": "Config",
+    "method": "get_config",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.get_config(path='config/v2_7.yaml')"
+  },
+  {
+    "id": "sample_v2_008",
+    "sdk_version": "v2",
+    "symbol": "Webhook.subscribe",
+    "class": "Webhook",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.subscribe(callback_url='https://api.example.com/v2/hook_8')"
+  },
+  {
+    "id": "sample_v2_009",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_9')\nres = client.query(payload={'query': 'user_9', 'limit': 10}, timeout=15)"
+  },
+  {
+    "id": "sample_v2_010",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_10')\nres = client.query(payload={'item_id': 10, 'active': True})"
+  },
+  {
+    "id": "sample_v2_011",
+    "sdk_version": "v2",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_11')\nres = client.send(payload={'event': 'click', 'idx': 11}, retry_backoff_ms=500, timeout_s=60)"
+  },
+  {
+    "id": "sample_v2_012",
+    "sdk_version": "v2",
+    "symbol": "Stream.feed",
+    "class": "Stream",
+    "method": "feed",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.feed(channel='telemetry_12', buffer_len=512, ping_interval=10000)"
+  },
+  {
+    "id": "sample_v2_013",
+    "sdk_version": "v2",
+    "symbol": "Batch.dispatch",
+    "class": "Batch",
+    "method": "dispatch",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.dispatch(payloads=[{'task_id': 13}], concurrency=5)"
+  },
+  {
+    "id": "sample_v2_014",
+    "sdk_version": "v2",
+    "symbol": "Auth.login",
+    "class": "Auth",
+    "method": "login",
+    "runnable": true,
+    "code": "from sdk import Auth\nsession = Auth.login(username='dev_14', password='secret_14', session_expiry=7200)"
+  },
+  {
+    "id": "sample_v2_015",
+    "sdk_version": "v2",
+    "symbol": "Config.get_config",
+    "class": "Config",
+    "method": "get_config",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.get_config(path='config/v2_15.yaml')"
+  },
+  {
+    "id": "sample_v2_016",
+    "sdk_version": "v2",
+    "symbol": "Webhook.subscribe",
+    "class": "Webhook",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.subscribe(callback_url='https://api.example.com/v2/hook_16')"
+  },
+  {
+    "id": "sample_v2_017",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_17')\nres = client.query(payload={'query': 'user_17', 'limit': 10}, timeout=15)"
+  },
+  {
+    "id": "sample_v2_018",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_18')\nres = client.query(payload={'item_id': 18, 'active': True})"
+  },
+  {
+    "id": "sample_v2_019",
+    "sdk_version": "v2",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_19')\nres = client.send(payload={'event': 'click', 'idx': 19}, retry_backoff_ms=500, timeout_s=60)"
+  },
+  {
+    "id": "sample_v2_020",
+    "sdk_version": "v2",
+    "symbol": "Stream.feed",
+    "class": "Stream",
+    "method": "feed",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.feed(channel='telemetry_20', buffer_len=512, ping_interval=10000)"
+  },
+  {
+    "id": "sample_v2_021",
+    "sdk_version": "v2",
+    "symbol": "Batch.dispatch",
+    "class": "Batch",
+    "method": "dispatch",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.dispatch(payloads=[{'task_id': 21}], concurrency=5)"
+  },
+  {
+    "id": "sample_v2_022",
+    "sdk_version": "v2",
+    "symbol": "Auth.login",
+    "class": "Auth",
+    "method": "login",
+    "runnable": true,
+    "code": "from sdk import Auth\nsession = Auth.login(username='dev_22', password='secret_22', session_expiry=7200)"
+  },
+  {
+    "id": "sample_v2_023",
+    "sdk_version": "v2",
+    "symbol": "Config.get_config",
+    "class": "Config",
+    "method": "get_config",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.get_config(path='config/v2_23.yaml')"
+  },
+  {
+    "id": "sample_v2_024",
+    "sdk_version": "v2",
+    "symbol": "Webhook.subscribe",
+    "class": "Webhook",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.subscribe(callback_url='https://api.example.com/v2/hook_24')"
+  },
+  {
+    "id": "sample_v2_025",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_25')\nres = client.query(payload={'query': 'user_25', 'limit': 10}, timeout=15)"
+  },
+  {
+    "id": "sample_v2_026",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_26')\nres = client.query(payload={'item_id': 26, 'active': True})"
+  },
+  {
+    "id": "sample_v2_027",
+    "sdk_version": "v2",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_27')\nres = client.send(payload={'event': 'click', 'idx': 27}, retry_backoff_ms=500, timeout_s=60)"
+  },
+  {
+    "id": "sample_v2_028",
+    "sdk_version": "v2",
+    "symbol": "Stream.feed",
+    "class": "Stream",
+    "method": "feed",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.feed(channel='telemetry_28', buffer_len=512, ping_interval=10000)"
+  },
+  {
+    "id": "sample_v2_029",
+    "sdk_version": "v2",
+    "symbol": "Batch.dispatch",
+    "class": "Batch",
+    "method": "dispatch",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.dispatch(payloads=[{'task_id': 29}], concurrency=5)"
+  },
+  {
+    "id": "sample_v2_030",
+    "sdk_version": "v2",
+    "symbol": "Auth.login",
+    "class": "Auth",
+    "method": "login",
+    "runnable": true,
+    "code": "from sdk import Auth\nsession = Auth.login(username='dev_30', password='secret_30', session_expiry=7200)"
+  },
+  {
+    "id": "sample_v2_031",
+    "sdk_version": "v2",
+    "symbol": "Config.get_config",
+    "class": "Config",
+    "method": "get_config",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.get_config(path='config/v2_31.yaml')"
+  },
+  {
+    "id": "sample_v2_032",
+    "sdk_version": "v2",
+    "symbol": "Webhook.subscribe",
+    "class": "Webhook",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.subscribe(callback_url='https://api.example.com/v2/hook_32')"
+  },
+  {
+    "id": "sample_v2_033",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_33')\nres = client.query(payload={'query': 'user_33', 'limit': 10}, timeout=15)"
+  },
+  {
+    "id": "sample_v2_034",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_34')\nres = client.query(payload={'item_id': 34, 'active': True})"
+  },
+  {
+    "id": "sample_v2_035",
+    "sdk_version": "v2",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_35')\nres = client.send(payload={'event': 'click', 'idx': 35}, retry_backoff_ms=500, timeout_s=60)"
+  },
+  {
+    "id": "sample_v2_036",
+    "sdk_version": "v2",
+    "symbol": "Stream.feed",
+    "class": "Stream",
+    "method": "feed",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.feed(channel='telemetry_36', buffer_len=512, ping_interval=10000)"
+  },
+  {
+    "id": "sample_v2_037",
+    "sdk_version": "v2",
+    "symbol": "Batch.dispatch",
+    "class": "Batch",
+    "method": "dispatch",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.dispatch(payloads=[{'task_id': 37}], concurrency=5)"
+  },
+  {
+    "id": "sample_v2_038",
+    "sdk_version": "v2",
+    "symbol": "Auth.login",
+    "class": "Auth",
+    "method": "login",
+    "runnable": true,
+    "code": "from sdk import Auth\nsession = Auth.login(username='dev_38', password='secret_38', session_expiry=7200)"
+  },
+  {
+    "id": "sample_v2_039",
+    "sdk_version": "v2",
+    "symbol": "Config.get_config",
+    "class": "Config",
+    "method": "get_config",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.get_config(path='config/v2_39.yaml')"
+  },
+  {
+    "id": "sample_v2_040",
+    "sdk_version": "v2",
+    "symbol": "Webhook.subscribe",
+    "class": "Webhook",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.subscribe(callback_url='https://api.example.com/v2/hook_40')"
+  },
+  {
+    "id": "sample_v2_041",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_41')\nres = client.query(payload={'query': 'user_41', 'limit': 10}, timeout=15)"
+  },
+  {
+    "id": "sample_v2_042",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_42')\nres = client.query(payload={'item_id': 42, 'active': True})"
+  },
+  {
+    "id": "sample_v2_043",
+    "sdk_version": "v2",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_43')\nres = client.send(payload={'event': 'click', 'idx': 43}, retry_backoff_ms=500, timeout_s=60)"
+  },
+  {
+    "id": "sample_v2_044",
+    "sdk_version": "v2",
+    "symbol": "Stream.feed",
+    "class": "Stream",
+    "method": "feed",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.feed(channel='telemetry_44', buffer_len=512, ping_interval=10000)"
+  },
+  {
+    "id": "sample_v2_045",
+    "sdk_version": "v2",
+    "symbol": "Batch.dispatch",
+    "class": "Batch",
+    "method": "dispatch",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.dispatch(payloads=[{'task_id': 45}], concurrency=5)"
+  },
+  {
+    "id": "sample_v2_046",
+    "sdk_version": "v2",
+    "symbol": "Auth.login",
+    "class": "Auth",
+    "method": "login",
+    "runnable": true,
+    "code": "from sdk import Auth\nsession = Auth.login(username='dev_46', password='secret_46', session_expiry=7200)"
+  },
+  {
+    "id": "sample_v2_047",
+    "sdk_version": "v2",
+    "symbol": "Config.get_config",
+    "class": "Config",
+    "method": "get_config",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.get_config(path='config/v2_47.yaml')"
+  },
+  {
+    "id": "sample_v2_048",
+    "sdk_version": "v2",
+    "symbol": "Webhook.subscribe",
+    "class": "Webhook",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.subscribe(callback_url='https://api.example.com/v2/hook_48')"
+  },
+  {
+    "id": "sample_v2_049",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_49')\nres = client.query(payload={'query': 'user_49', 'limit': 10}, timeout=15)"
+  },
+  {
+    "id": "sample_v2_050",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_50')\nres = client.query(payload={'item_id': 50, 'active': True})"
+  },
+  {
+    "id": "sample_v2_051",
+    "sdk_version": "v2",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_51')\nres = client.send(payload={'event': 'click', 'idx': 51}, retry_backoff_ms=500, timeout_s=60)"
+  },
+  {
+    "id": "sample_v2_052",
+    "sdk_version": "v2",
+    "symbol": "Stream.feed",
+    "class": "Stream",
+    "method": "feed",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.feed(channel='telemetry_52', buffer_len=512, ping_interval=10000)"
+  },
+  {
+    "id": "sample_v2_053",
+    "sdk_version": "v2",
+    "symbol": "Batch.dispatch",
+    "class": "Batch",
+    "method": "dispatch",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.dispatch(payloads=[{'task_id': 53}], concurrency=5)"
+  },
+  {
+    "id": "sample_v2_054",
+    "sdk_version": "v2",
+    "symbol": "Auth.login",
+    "class": "Auth",
+    "method": "login",
+    "runnable": true,
+    "code": "from sdk import Auth\nsession = Auth.login(username='dev_54', password='secret_54', session_expiry=7200)"
+  },
+  {
+    "id": "sample_v2_055",
+    "sdk_version": "v2",
+    "symbol": "Config.get_config",
+    "class": "Config",
+    "method": "get_config",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.get_config(path='config/v2_55.yaml')"
+  },
+  {
+    "id": "sample_v2_056",
+    "sdk_version": "v2",
+    "symbol": "Webhook.subscribe",
+    "class": "Webhook",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.subscribe(callback_url='https://api.example.com/v2/hook_56')"
+  },
+  {
+    "id": "sample_v2_057",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_57')\nres = client.query(payload={'query': 'user_57', 'limit': 10}, timeout=15)"
+  },
+  {
+    "id": "sample_v2_058",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_58')\nres = client.query(payload={'item_id': 58, 'active': True})"
+  },
+  {
+    "id": "sample_v2_059",
+    "sdk_version": "v2",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_59')\nres = client.send(payload={'event': 'click', 'idx': 59}, retry_backoff_ms=500, timeout_s=60)"
+  },
+  {
+    "id": "sample_v2_060",
+    "sdk_version": "v2",
+    "symbol": "Stream.feed",
+    "class": "Stream",
+    "method": "feed",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.feed(channel='telemetry_60', buffer_len=512, ping_interval=10000)"
+  },
+  {
+    "id": "sample_v2_061",
+    "sdk_version": "v2",
+    "symbol": "Batch.dispatch",
+    "class": "Batch",
+    "method": "dispatch",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.dispatch(payloads=[{'task_id': 61}], concurrency=5)"
+  },
+  {
+    "id": "sample_v2_062",
+    "sdk_version": "v2",
+    "symbol": "Auth.login",
+    "class": "Auth",
+    "method": "login",
+    "runnable": true,
+    "code": "from sdk import Auth\nsession = Auth.login(username='dev_62', password='secret_62', session_expiry=7200)"
+  },
+  {
+    "id": "sample_v2_063",
+    "sdk_version": "v2",
+    "symbol": "Config.get_config",
+    "class": "Config",
+    "method": "get_config",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.get_config(path='config/v2_63.yaml')"
+  },
+  {
+    "id": "sample_v2_064",
+    "sdk_version": "v2",
+    "symbol": "Webhook.subscribe",
+    "class": "Webhook",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.subscribe(callback_url='https://api.example.com/v2/hook_64')"
+  },
+  {
+    "id": "sample_v2_065",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_65')\nres = client.query(payload={'query': 'user_65', 'limit': 10}, timeout=15)"
+  },
+  {
+    "id": "sample_v2_066",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_66')\nres = client.query(payload={'item_id': 66, 'active': True})"
+  },
+  {
+    "id": "sample_v2_067",
+    "sdk_version": "v2",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_67')\nres = client.send(payload={'event': 'click', 'idx': 67}, retry_backoff_ms=500, timeout_s=60)"
+  },
+  {
+    "id": "sample_v2_068",
+    "sdk_version": "v2",
+    "symbol": "Stream.feed",
+    "class": "Stream",
+    "method": "feed",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.feed(channel='telemetry_68', buffer_len=512, ping_interval=10000)"
+  },
+  {
+    "id": "sample_v2_069",
+    "sdk_version": "v2",
+    "symbol": "Batch.dispatch",
+    "class": "Batch",
+    "method": "dispatch",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.dispatch(payloads=[{'task_id': 69}], concurrency=5)"
+  },
+  {
+    "id": "sample_v2_070",
+    "sdk_version": "v2",
+    "symbol": "Auth.login",
+    "class": "Auth",
+    "method": "login",
+    "runnable": true,
+    "code": "from sdk import Auth\nsession = Auth.login(username='dev_70', password='secret_70', session_expiry=7200)"
+  },
+  {
+    "id": "sample_v2_071",
+    "sdk_version": "v2",
+    "symbol": "Config.get_config",
+    "class": "Config",
+    "method": "get_config",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.get_config(path='config/v2_71.yaml')"
+  },
+  {
+    "id": "sample_v2_072",
+    "sdk_version": "v2",
+    "symbol": "Webhook.subscribe",
+    "class": "Webhook",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.subscribe(callback_url='https://api.example.com/v2/hook_72')"
+  },
+  {
+    "id": "sample_v2_073",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_73')\nres = client.query(payload={'query': 'user_73', 'limit': 10}, timeout=15)"
+  },
+  {
+    "id": "sample_v2_074",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_74')\nres = client.query(payload={'item_id': 74, 'active': True})"
+  },
+  {
+    "id": "sample_v2_075",
+    "sdk_version": "v2",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_75')\nres = client.send(payload={'event': 'click', 'idx': 75}, retry_backoff_ms=500, timeout_s=60)"
+  },
+  {
+    "id": "sample_v2_076",
+    "sdk_version": "v2",
+    "symbol": "Stream.feed",
+    "class": "Stream",
+    "method": "feed",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.feed(channel='telemetry_76', buffer_len=512, ping_interval=10000)"
+  },
+  {
+    "id": "sample_v2_077",
+    "sdk_version": "v2",
+    "symbol": "Batch.dispatch",
+    "class": "Batch",
+    "method": "dispatch",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.dispatch(payloads=[{'task_id': 77}], concurrency=5)"
+  },
+  {
+    "id": "sample_v2_078",
+    "sdk_version": "v2",
+    "symbol": "Auth.login",
+    "class": "Auth",
+    "method": "login",
+    "runnable": true,
+    "code": "from sdk import Auth\nsession = Auth.login(username='dev_78', password='secret_78', session_expiry=7200)"
+  },
+  {
+    "id": "sample_v2_079",
+    "sdk_version": "v2",
+    "symbol": "Config.get_config",
+    "class": "Config",
+    "method": "get_config",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.get_config(path='config/v2_79.yaml')"
+  },
+  {
+    "id": "sample_v2_080",
+    "sdk_version": "v2",
+    "symbol": "Webhook.subscribe",
+    "class": "Webhook",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.subscribe(callback_url='https://api.example.com/v2/hook_80')"
+  },
+  {
+    "id": "sample_v2_081",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_81')\nres = client.query(payload={'query': 'user_81', 'limit': 10}, timeout=15)"
+  },
+  {
+    "id": "sample_v2_082",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_82')\nres = client.query(payload={'item_id': 82, 'active': True})"
+  },
+  {
+    "id": "sample_v2_083",
+    "sdk_version": "v2",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_83')\nres = client.send(payload={'event': 'click', 'idx': 83}, retry_backoff_ms=500, timeout_s=60)"
+  },
+  {
+    "id": "sample_v2_084",
+    "sdk_version": "v2",
+    "symbol": "Stream.feed",
+    "class": "Stream",
+    "method": "feed",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.feed(channel='telemetry_84', buffer_len=512, ping_interval=10000)"
+  },
+  {
+    "id": "sample_v2_085",
+    "sdk_version": "v2",
+    "symbol": "Batch.dispatch",
+    "class": "Batch",
+    "method": "dispatch",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.dispatch(payloads=[{'task_id': 85}], concurrency=5)"
+  },
+  {
+    "id": "sample_v2_086",
+    "sdk_version": "v2",
+    "symbol": "Auth.login",
+    "class": "Auth",
+    "method": "login",
+    "runnable": true,
+    "code": "from sdk import Auth\nsession = Auth.login(username='dev_86', password='secret_86', session_expiry=7200)"
+  },
+  {
+    "id": "sample_v2_087",
+    "sdk_version": "v2",
+    "symbol": "Config.get_config",
+    "class": "Config",
+    "method": "get_config",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.get_config(path='config/v2_87.yaml')"
+  },
+  {
+    "id": "sample_v2_088",
+    "sdk_version": "v2",
+    "symbol": "Webhook.subscribe",
+    "class": "Webhook",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.subscribe(callback_url='https://api.example.com/v2/hook_88')"
+  },
+  {
+    "id": "sample_v2_089",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_89')\nres = client.query(payload={'query': 'user_89', 'limit': 10}, timeout=15)"
+  },
+  {
+    "id": "sample_v2_090",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_90')\nres = client.query(payload={'item_id': 90, 'active': True})"
+  },
+  {
+    "id": "sample_v2_091",
+    "sdk_version": "v2",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_91')\nres = client.send(payload={'event': 'click', 'idx': 91}, retry_backoff_ms=500, timeout_s=60)"
+  },
+  {
+    "id": "sample_v2_092",
+    "sdk_version": "v2",
+    "symbol": "Stream.feed",
+    "class": "Stream",
+    "method": "feed",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.feed(channel='telemetry_92', buffer_len=512, ping_interval=10000)"
+  },
+  {
+    "id": "sample_v2_093",
+    "sdk_version": "v2",
+    "symbol": "Batch.dispatch",
+    "class": "Batch",
+    "method": "dispatch",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.dispatch(payloads=[{'task_id': 93}], concurrency=5)"
+  },
+  {
+    "id": "sample_v2_094",
+    "sdk_version": "v2",
+    "symbol": "Auth.login",
+    "class": "Auth",
+    "method": "login",
+    "runnable": true,
+    "code": "from sdk import Auth\nsession = Auth.login(username='dev_94', password='secret_94', session_expiry=7200)"
+  },
+  {
+    "id": "sample_v2_095",
+    "sdk_version": "v2",
+    "symbol": "Config.get_config",
+    "class": "Config",
+    "method": "get_config",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.get_config(path='config/v2_95.yaml')"
+  },
+  {
+    "id": "sample_v2_096",
+    "sdk_version": "v2",
+    "symbol": "Webhook.subscribe",
+    "class": "Webhook",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.subscribe(callback_url='https://api.example.com/v2/hook_96')"
+  },
+  {
+    "id": "sample_v2_097",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_97')\nres = client.query(payload={'query': 'user_97', 'limit': 10}, timeout=15)"
+  },
+  {
+    "id": "sample_v2_098",
+    "sdk_version": "v2",
+    "symbol": "Client.query",
+    "class": "Client",
+    "method": "query",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_98')\nres = client.query(payload={'item_id': 98, 'active': True})"
+  },
+  {
+    "id": "sample_v2_099",
+    "sdk_version": "v2",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_v2_live_99')\nres = client.send(payload={'event': 'click', 'idx': 99}, retry_backoff_ms=500, timeout_s=60)"
+  },
+  {
+    "id": "sample_v2_100",
+    "sdk_version": "v2",
+    "symbol": "Stream.feed",
+    "class": "Stream",
+    "method": "feed",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.feed(channel='telemetry_100', buffer_len=512, ping_interval=10000)"
+  },
+  {
+    "id": "sample_v3_001",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_1')\nres = client.search(payload={'query': 'user_1', 'limit': 10}, timeout=30)"
+  },
+  {
+    "id": "sample_v3_002",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_2')\nres = client.search(payload={'item_id': 2, 'active': True}, timeout=20, retry_backoff_ms=250)"
+  },
+  {
+    "id": "sample_v3_003",
+    "sdk_version": "v3",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_3')\nres = client.send(payload={'event': 'click', 'idx': 3}, retry_backoff_ms=250, timeout_s=30)"
+  },
+  {
+    "id": "sample_v3_004",
+    "sdk_version": "v3",
+    "symbol": "Stream.subscribe",
+    "class": "Stream",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.subscribe(channel_name='telemetry_4', max_buffer_size=1024, keep_alive_ping_ms=5000)"
+  },
+  {
+    "id": "sample_v3_005",
+    "sdk_version": "v3",
+    "symbol": "Batch.submit_jobs",
+    "class": "Batch",
+    "method": "submit_jobs",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.submit_jobs(job_list=[{'task_id': 5}], max_concurrency=10, auto_retry_failed=True)"
+  },
+  {
+    "id": "sample_v3_006",
+    "sdk_version": "v3",
+    "symbol": "Client.auth",
+    "class": "Client",
+    "method": "auth",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_6')\ntoken = client.auth(token_ttl_sec=3600)"
+  },
+  {
+    "id": "sample_v3_007",
+    "sdk_version": "v3",
+    "symbol": "Config.load_settings",
+    "class": "Config",
+    "method": "load_settings",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.load_settings(file_path='config/v3_7.yaml', env_override=True)"
+  },
+  {
+    "id": "sample_v3_008",
+    "sdk_version": "v3",
+    "symbol": "Webhook.register_listener",
+    "class": "Webhook",
+    "method": "register_listener",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.register_listener(target_url='https://api.example.com/v3/hook_8', signature_algorithm='HMAC-SHA256')"
+  },
+  {
+    "id": "sample_v3_009",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_9')\nres = client.search(payload={'query': 'user_9', 'limit': 10}, timeout=30)"
+  },
+  {
+    "id": "sample_v3_010",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_10')\nres = client.search(payload={'item_id': 10, 'active': True}, timeout=20, retry_backoff_ms=250)"
+  },
+  {
+    "id": "sample_v3_011",
+    "sdk_version": "v3",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_11')\nres = client.send(payload={'event': 'click', 'idx': 11}, retry_backoff_ms=250, timeout_s=30)"
+  },
+  {
+    "id": "sample_v3_012",
+    "sdk_version": "v3",
+    "symbol": "Stream.subscribe",
+    "class": "Stream",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.subscribe(channel_name='telemetry_12', max_buffer_size=1024, keep_alive_ping_ms=5000)"
+  },
+  {
+    "id": "sample_v3_013",
+    "sdk_version": "v3",
+    "symbol": "Batch.submit_jobs",
+    "class": "Batch",
+    "method": "submit_jobs",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.submit_jobs(job_list=[{'task_id': 13}], max_concurrency=10, auto_retry_failed=True)"
+  },
+  {
+    "id": "sample_v3_014",
+    "sdk_version": "v3",
+    "symbol": "Client.auth",
+    "class": "Client",
+    "method": "auth",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_14')\ntoken = client.auth(token_ttl_sec=3600)"
+  },
+  {
+    "id": "sample_v3_015",
+    "sdk_version": "v3",
+    "symbol": "Config.load_settings",
+    "class": "Config",
+    "method": "load_settings",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.load_settings(file_path='config/v3_15.yaml', env_override=True)"
+  },
+  {
+    "id": "sample_v3_016",
+    "sdk_version": "v3",
+    "symbol": "Webhook.register_listener",
+    "class": "Webhook",
+    "method": "register_listener",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.register_listener(target_url='https://api.example.com/v3/hook_16', signature_algorithm='HMAC-SHA256')"
+  },
+  {
+    "id": "sample_v3_017",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_17')\nres = client.search(payload={'query': 'user_17', 'limit': 10}, timeout=30)"
+  },
+  {
+    "id": "sample_v3_018",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_18')\nres = client.search(payload={'item_id': 18, 'active': True}, timeout=20, retry_backoff_ms=250)"
+  },
+  {
+    "id": "sample_v3_019",
+    "sdk_version": "v3",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_19')\nres = client.send(payload={'event': 'click', 'idx': 19}, retry_backoff_ms=250, timeout_s=30)"
+  },
+  {
+    "id": "sample_v3_020",
+    "sdk_version": "v3",
+    "symbol": "Stream.subscribe",
+    "class": "Stream",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.subscribe(channel_name='telemetry_20', max_buffer_size=1024, keep_alive_ping_ms=5000)"
+  },
+  {
+    "id": "sample_v3_021",
+    "sdk_version": "v3",
+    "symbol": "Batch.submit_jobs",
+    "class": "Batch",
+    "method": "submit_jobs",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.submit_jobs(job_list=[{'task_id': 21}], max_concurrency=10, auto_retry_failed=True)"
+  },
+  {
+    "id": "sample_v3_022",
+    "sdk_version": "v3",
+    "symbol": "Client.auth",
+    "class": "Client",
+    "method": "auth",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_22')\ntoken = client.auth(token_ttl_sec=3600)"
+  },
+  {
+    "id": "sample_v3_023",
+    "sdk_version": "v3",
+    "symbol": "Config.load_settings",
+    "class": "Config",
+    "method": "load_settings",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.load_settings(file_path='config/v3_23.yaml', env_override=True)"
+  },
+  {
+    "id": "sample_v3_024",
+    "sdk_version": "v3",
+    "symbol": "Webhook.register_listener",
+    "class": "Webhook",
+    "method": "register_listener",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.register_listener(target_url='https://api.example.com/v3/hook_24', signature_algorithm='HMAC-SHA256')"
+  },
+  {
+    "id": "sample_v3_025",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_25')\nres = client.search(payload={'query': 'user_25', 'limit': 10}, timeout=30)"
+  },
+  {
+    "id": "sample_v3_026",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_26')\nres = client.search(payload={'item_id': 26, 'active': True}, timeout=20, retry_backoff_ms=250)"
+  },
+  {
+    "id": "sample_v3_027",
+    "sdk_version": "v3",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_27')\nres = client.send(payload={'event': 'click', 'idx': 27}, retry_backoff_ms=250, timeout_s=30)"
+  },
+  {
+    "id": "sample_v3_028",
+    "sdk_version": "v3",
+    "symbol": "Stream.subscribe",
+    "class": "Stream",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.subscribe(channel_name='telemetry_28', max_buffer_size=1024, keep_alive_ping_ms=5000)"
+  },
+  {
+    "id": "sample_v3_029",
+    "sdk_version": "v3",
+    "symbol": "Batch.submit_jobs",
+    "class": "Batch",
+    "method": "submit_jobs",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.submit_jobs(job_list=[{'task_id': 29}], max_concurrency=10, auto_retry_failed=True)"
+  },
+  {
+    "id": "sample_v3_030",
+    "sdk_version": "v3",
+    "symbol": "Client.auth",
+    "class": "Client",
+    "method": "auth",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_30')\ntoken = client.auth(token_ttl_sec=3600)"
+  },
+  {
+    "id": "sample_v3_031",
+    "sdk_version": "v3",
+    "symbol": "Config.load_settings",
+    "class": "Config",
+    "method": "load_settings",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.load_settings(file_path='config/v3_31.yaml', env_override=True)"
+  },
+  {
+    "id": "sample_v3_032",
+    "sdk_version": "v3",
+    "symbol": "Webhook.register_listener",
+    "class": "Webhook",
+    "method": "register_listener",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.register_listener(target_url='https://api.example.com/v3/hook_32', signature_algorithm='HMAC-SHA256')"
+  },
+  {
+    "id": "sample_v3_033",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_33')\nres = client.search(payload={'query': 'user_33', 'limit': 10}, timeout=30)"
+  },
+  {
+    "id": "sample_v3_034",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_34')\nres = client.search(payload={'item_id': 34, 'active': True}, timeout=20, retry_backoff_ms=250)"
+  },
+  {
+    "id": "sample_v3_035",
+    "sdk_version": "v3",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_35')\nres = client.send(payload={'event': 'click', 'idx': 35}, retry_backoff_ms=250, timeout_s=30)"
+  },
+  {
+    "id": "sample_v3_036",
+    "sdk_version": "v3",
+    "symbol": "Stream.subscribe",
+    "class": "Stream",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.subscribe(channel_name='telemetry_36', max_buffer_size=1024, keep_alive_ping_ms=5000)"
+  },
+  {
+    "id": "sample_v3_037",
+    "sdk_version": "v3",
+    "symbol": "Batch.submit_jobs",
+    "class": "Batch",
+    "method": "submit_jobs",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.submit_jobs(job_list=[{'task_id': 37}], max_concurrency=10, auto_retry_failed=True)"
+  },
+  {
+    "id": "sample_v3_038",
+    "sdk_version": "v3",
+    "symbol": "Client.auth",
+    "class": "Client",
+    "method": "auth",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_38')\ntoken = client.auth(token_ttl_sec=3600)"
+  },
+  {
+    "id": "sample_v3_039",
+    "sdk_version": "v3",
+    "symbol": "Config.load_settings",
+    "class": "Config",
+    "method": "load_settings",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.load_settings(file_path='config/v3_39.yaml', env_override=True)"
+  },
+  {
+    "id": "sample_v3_040",
+    "sdk_version": "v3",
+    "symbol": "Webhook.register_listener",
+    "class": "Webhook",
+    "method": "register_listener",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.register_listener(target_url='https://api.example.com/v3/hook_40', signature_algorithm='HMAC-SHA256')"
+  },
+  {
+    "id": "sample_v3_041",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_41')\nres = client.search(payload={'query': 'user_41', 'limit': 10}, timeout=30)"
+  },
+  {
+    "id": "sample_v3_042",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_42')\nres = client.search(payload={'item_id': 42, 'active': True}, timeout=20, retry_backoff_ms=250)"
+  },
+  {
+    "id": "sample_v3_043",
+    "sdk_version": "v3",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_43')\nres = client.send(payload={'event': 'click', 'idx': 43}, retry_backoff_ms=250, timeout_s=30)"
+  },
+  {
+    "id": "sample_v3_044",
+    "sdk_version": "v3",
+    "symbol": "Stream.subscribe",
+    "class": "Stream",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.subscribe(channel_name='telemetry_44', max_buffer_size=1024, keep_alive_ping_ms=5000)"
+  },
+  {
+    "id": "sample_v3_045",
+    "sdk_version": "v3",
+    "symbol": "Batch.submit_jobs",
+    "class": "Batch",
+    "method": "submit_jobs",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.submit_jobs(job_list=[{'task_id': 45}], max_concurrency=10, auto_retry_failed=True)"
+  },
+  {
+    "id": "sample_v3_046",
+    "sdk_version": "v3",
+    "symbol": "Client.auth",
+    "class": "Client",
+    "method": "auth",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_46')\ntoken = client.auth(token_ttl_sec=3600)"
+  },
+  {
+    "id": "sample_v3_047",
+    "sdk_version": "v3",
+    "symbol": "Config.load_settings",
+    "class": "Config",
+    "method": "load_settings",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.load_settings(file_path='config/v3_47.yaml', env_override=True)"
+  },
+  {
+    "id": "sample_v3_048",
+    "sdk_version": "v3",
+    "symbol": "Webhook.register_listener",
+    "class": "Webhook",
+    "method": "register_listener",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.register_listener(target_url='https://api.example.com/v3/hook_48', signature_algorithm='HMAC-SHA256')"
+  },
+  {
+    "id": "sample_v3_049",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_49')\nres = client.search(payload={'query': 'user_49', 'limit': 10}, timeout=30)"
+  },
+  {
+    "id": "sample_v3_050",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_50')\nres = client.search(payload={'item_id': 50, 'active': True}, timeout=20, retry_backoff_ms=250)"
+  },
+  {
+    "id": "sample_v3_051",
+    "sdk_version": "v3",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_51')\nres = client.send(payload={'event': 'click', 'idx': 51}, retry_backoff_ms=250, timeout_s=30)"
+  },
+  {
+    "id": "sample_v3_052",
+    "sdk_version": "v3",
+    "symbol": "Stream.subscribe",
+    "class": "Stream",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.subscribe(channel_name='telemetry_52', max_buffer_size=1024, keep_alive_ping_ms=5000)"
+  },
+  {
+    "id": "sample_v3_053",
+    "sdk_version": "v3",
+    "symbol": "Batch.submit_jobs",
+    "class": "Batch",
+    "method": "submit_jobs",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.submit_jobs(job_list=[{'task_id': 53}], max_concurrency=10, auto_retry_failed=True)"
+  },
+  {
+    "id": "sample_v3_054",
+    "sdk_version": "v3",
+    "symbol": "Client.auth",
+    "class": "Client",
+    "method": "auth",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_54')\ntoken = client.auth(token_ttl_sec=3600)"
+  },
+  {
+    "id": "sample_v3_055",
+    "sdk_version": "v3",
+    "symbol": "Config.load_settings",
+    "class": "Config",
+    "method": "load_settings",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.load_settings(file_path='config/v3_55.yaml', env_override=True)"
+  },
+  {
+    "id": "sample_v3_056",
+    "sdk_version": "v3",
+    "symbol": "Webhook.register_listener",
+    "class": "Webhook",
+    "method": "register_listener",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.register_listener(target_url='https://api.example.com/v3/hook_56', signature_algorithm='HMAC-SHA256')"
+  },
+  {
+    "id": "sample_v3_057",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_57')\nres = client.search(payload={'query': 'user_57', 'limit': 10}, timeout=30)"
+  },
+  {
+    "id": "sample_v3_058",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_58')\nres = client.search(payload={'item_id': 58, 'active': True}, timeout=20, retry_backoff_ms=250)"
+  },
+  {
+    "id": "sample_v3_059",
+    "sdk_version": "v3",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_59')\nres = client.send(payload={'event': 'click', 'idx': 59}, retry_backoff_ms=250, timeout_s=30)"
+  },
+  {
+    "id": "sample_v3_060",
+    "sdk_version": "v3",
+    "symbol": "Stream.subscribe",
+    "class": "Stream",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.subscribe(channel_name='telemetry_60', max_buffer_size=1024, keep_alive_ping_ms=5000)"
+  },
+  {
+    "id": "sample_v3_061",
+    "sdk_version": "v3",
+    "symbol": "Batch.submit_jobs",
+    "class": "Batch",
+    "method": "submit_jobs",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.submit_jobs(job_list=[{'task_id': 61}], max_concurrency=10, auto_retry_failed=True)"
+  },
+  {
+    "id": "sample_v3_062",
+    "sdk_version": "v3",
+    "symbol": "Client.auth",
+    "class": "Client",
+    "method": "auth",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_62')\ntoken = client.auth(token_ttl_sec=3600)"
+  },
+  {
+    "id": "sample_v3_063",
+    "sdk_version": "v3",
+    "symbol": "Config.load_settings",
+    "class": "Config",
+    "method": "load_settings",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.load_settings(file_path='config/v3_63.yaml', env_override=True)"
+  },
+  {
+    "id": "sample_v3_064",
+    "sdk_version": "v3",
+    "symbol": "Webhook.register_listener",
+    "class": "Webhook",
+    "method": "register_listener",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.register_listener(target_url='https://api.example.com/v3/hook_64', signature_algorithm='HMAC-SHA256')"
+  },
+  {
+    "id": "sample_v3_065",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_65')\nres = client.search(payload={'query': 'user_65', 'limit': 10}, timeout=30)"
+  },
+  {
+    "id": "sample_v3_066",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_66')\nres = client.search(payload={'item_id': 66, 'active': True}, timeout=20, retry_backoff_ms=250)"
+  },
+  {
+    "id": "sample_v3_067",
+    "sdk_version": "v3",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_67')\nres = client.send(payload={'event': 'click', 'idx': 67}, retry_backoff_ms=250, timeout_s=30)"
+  },
+  {
+    "id": "sample_v3_068",
+    "sdk_version": "v3",
+    "symbol": "Stream.subscribe",
+    "class": "Stream",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.subscribe(channel_name='telemetry_68', max_buffer_size=1024, keep_alive_ping_ms=5000)"
+  },
+  {
+    "id": "sample_v3_069",
+    "sdk_version": "v3",
+    "symbol": "Batch.submit_jobs",
+    "class": "Batch",
+    "method": "submit_jobs",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.submit_jobs(job_list=[{'task_id': 69}], max_concurrency=10, auto_retry_failed=True)"
+  },
+  {
+    "id": "sample_v3_070",
+    "sdk_version": "v3",
+    "symbol": "Client.auth",
+    "class": "Client",
+    "method": "auth",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_70')\ntoken = client.auth(token_ttl_sec=3600)"
+  },
+  {
+    "id": "sample_v3_071",
+    "sdk_version": "v3",
+    "symbol": "Config.load_settings",
+    "class": "Config",
+    "method": "load_settings",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.load_settings(file_path='config/v3_71.yaml', env_override=True)"
+  },
+  {
+    "id": "sample_v3_072",
+    "sdk_version": "v3",
+    "symbol": "Webhook.register_listener",
+    "class": "Webhook",
+    "method": "register_listener",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.register_listener(target_url='https://api.example.com/v3/hook_72', signature_algorithm='HMAC-SHA256')"
+  },
+  {
+    "id": "sample_v3_073",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_73')\nres = client.search(payload={'query': 'user_73', 'limit': 10}, timeout=30)"
+  },
+  {
+    "id": "sample_v3_074",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_74')\nres = client.search(payload={'item_id': 74, 'active': True}, timeout=20, retry_backoff_ms=250)"
+  },
+  {
+    "id": "sample_v3_075",
+    "sdk_version": "v3",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_75')\nres = client.send(payload={'event': 'click', 'idx': 75}, retry_backoff_ms=250, timeout_s=30)"
+  },
+  {
+    "id": "sample_v3_076",
+    "sdk_version": "v3",
+    "symbol": "Stream.subscribe",
+    "class": "Stream",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.subscribe(channel_name='telemetry_76', max_buffer_size=1024, keep_alive_ping_ms=5000)"
+  },
+  {
+    "id": "sample_v3_077",
+    "sdk_version": "v3",
+    "symbol": "Batch.submit_jobs",
+    "class": "Batch",
+    "method": "submit_jobs",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.submit_jobs(job_list=[{'task_id': 77}], max_concurrency=10, auto_retry_failed=True)"
+  },
+  {
+    "id": "sample_v3_078",
+    "sdk_version": "v3",
+    "symbol": "Client.auth",
+    "class": "Client",
+    "method": "auth",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_78')\ntoken = client.auth(token_ttl_sec=3600)"
+  },
+  {
+    "id": "sample_v3_079",
+    "sdk_version": "v3",
+    "symbol": "Config.load_settings",
+    "class": "Config",
+    "method": "load_settings",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.load_settings(file_path='config/v3_79.yaml', env_override=True)"
+  },
+  {
+    "id": "sample_v3_080",
+    "sdk_version": "v3",
+    "symbol": "Webhook.register_listener",
+    "class": "Webhook",
+    "method": "register_listener",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.register_listener(target_url='https://api.example.com/v3/hook_80', signature_algorithm='HMAC-SHA256')"
+  },
+  {
+    "id": "sample_v3_081",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_81')\nres = client.search(payload={'query': 'user_81', 'limit': 10}, timeout=30)"
+  },
+  {
+    "id": "sample_v3_082",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_82')\nres = client.search(payload={'item_id': 82, 'active': True}, timeout=20, retry_backoff_ms=250)"
+  },
+  {
+    "id": "sample_v3_083",
+    "sdk_version": "v3",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_83')\nres = client.send(payload={'event': 'click', 'idx': 83}, retry_backoff_ms=250, timeout_s=30)"
+  },
+  {
+    "id": "sample_v3_084",
+    "sdk_version": "v3",
+    "symbol": "Stream.subscribe",
+    "class": "Stream",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.subscribe(channel_name='telemetry_84', max_buffer_size=1024, keep_alive_ping_ms=5000)"
+  },
+  {
+    "id": "sample_v3_085",
+    "sdk_version": "v3",
+    "symbol": "Batch.submit_jobs",
+    "class": "Batch",
+    "method": "submit_jobs",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.submit_jobs(job_list=[{'task_id': 85}], max_concurrency=10, auto_retry_failed=True)"
+  },
+  {
+    "id": "sample_v3_086",
+    "sdk_version": "v3",
+    "symbol": "Client.auth",
+    "class": "Client",
+    "method": "auth",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_86')\ntoken = client.auth(token_ttl_sec=3600)"
+  },
+  {
+    "id": "sample_v3_087",
+    "sdk_version": "v3",
+    "symbol": "Config.load_settings",
+    "class": "Config",
+    "method": "load_settings",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.load_settings(file_path='config/v3_87.yaml', env_override=True)"
+  },
+  {
+    "id": "sample_v3_088",
+    "sdk_version": "v3",
+    "symbol": "Webhook.register_listener",
+    "class": "Webhook",
+    "method": "register_listener",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.register_listener(target_url='https://api.example.com/v3/hook_88', signature_algorithm='HMAC-SHA256')"
+  },
+  {
+    "id": "sample_v3_089",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_89')\nres = client.search(payload={'query': 'user_89', 'limit': 10}, timeout=30)"
+  },
+  {
+    "id": "sample_v3_090",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_90')\nres = client.search(payload={'item_id': 90, 'active': True}, timeout=20, retry_backoff_ms=250)"
+  },
+  {
+    "id": "sample_v3_091",
+    "sdk_version": "v3",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_91')\nres = client.send(payload={'event': 'click', 'idx': 91}, retry_backoff_ms=250, timeout_s=30)"
+  },
+  {
+    "id": "sample_v3_092",
+    "sdk_version": "v3",
+    "symbol": "Stream.subscribe",
+    "class": "Stream",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.subscribe(channel_name='telemetry_92', max_buffer_size=1024, keep_alive_ping_ms=5000)"
+  },
+  {
+    "id": "sample_v3_093",
+    "sdk_version": "v3",
+    "symbol": "Batch.submit_jobs",
+    "class": "Batch",
+    "method": "submit_jobs",
+    "runnable": true,
+    "code": "from sdk import Batch\nbatch = Batch.submit_jobs(job_list=[{'task_id': 93}], max_concurrency=10, auto_retry_failed=True)"
+  },
+  {
+    "id": "sample_v3_094",
+    "sdk_version": "v3",
+    "symbol": "Client.auth",
+    "class": "Client",
+    "method": "auth",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_94')\ntoken = client.auth(token_ttl_sec=3600)"
+  },
+  {
+    "id": "sample_v3_095",
+    "sdk_version": "v3",
+    "symbol": "Config.load_settings",
+    "class": "Config",
+    "method": "load_settings",
+    "runnable": true,
+    "code": "from sdk import Config\ncfg = Config.load_settings(file_path='config/v3_95.yaml', env_override=True)"
+  },
+  {
+    "id": "sample_v3_096",
+    "sdk_version": "v3",
+    "symbol": "Webhook.register_listener",
+    "class": "Webhook",
+    "method": "register_listener",
+    "runnable": true,
+    "code": "from sdk import Webhook\nwh = Webhook.register_listener(target_url='https://api.example.com/v3/hook_96', signature_algorithm='HMAC-SHA256')"
+  },
+  {
+    "id": "sample_v3_097",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_97')\nres = client.search(payload={'query': 'user_97', 'limit': 10}, timeout=30)"
+  },
+  {
+    "id": "sample_v3_098",
+    "sdk_version": "v3",
+    "symbol": "Client.search",
+    "class": "Client",
+    "method": "search",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_98')\nres = client.search(payload={'item_id': 98, 'active': True}, timeout=20, retry_backoff_ms=250)"
+  },
+  {
+    "id": "sample_v3_099",
+    "sdk_version": "v3",
+    "symbol": "Client.send",
+    "class": "Client",
+    "method": "send",
+    "runnable": true,
+    "code": "from sdk import Client\nclient = Client(api_key='sk_live_v3_99')\nres = client.send(payload={'event': 'click', 'idx': 99}, retry_backoff_ms=250, timeout_s=30)"
+  },
+  {
+    "id": "sample_v3_100",
+    "sdk_version": "v3",
+    "symbol": "Stream.subscribe",
+    "class": "Stream",
+    "method": "subscribe",
+    "runnable": true,
+    "code": "from sdk import Stream\nstream = Stream.subscribe(channel_name='telemetry_100', max_buffer_size=1024, keep_alive_ping_ms=5000)"
+  }
+]
