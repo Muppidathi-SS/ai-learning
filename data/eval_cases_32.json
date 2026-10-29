@@ -1,0 +1,516 @@
+[
+  {
+    "id": "eval_case_01",
+    "category": "v2_query",
+    "caller_version": "v2.4",
+    "question": "How do I query user records using Client.query in SDK v2.4?",
+    "expected_symbols": [
+      "Client.query"
+    ],
+    "forbidden_symbols": [
+      "Client.search"
+    ],
+    "expected_doc_citation_version": "v2",
+    "should_surface_deprecation": true,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_02",
+    "category": "v2_query",
+    "caller_version": "v2.4",
+    "question": "How do I consume telemetry feed in SDK 2.4 with Stream.feed?",
+    "expected_symbols": [
+      "Stream.feed"
+    ],
+    "forbidden_symbols": [
+      "Stream.subscribe"
+    ],
+    "expected_doc_citation_version": "v2",
+    "should_surface_deprecation": true,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_03",
+    "category": "v2_query",
+    "caller_version": "v2.4",
+    "question": "How do I dispatch concurrent batch tasks with Batch.dispatch in v2?",
+    "expected_symbols": [
+      "Batch.dispatch"
+    ],
+    "forbidden_symbols": [
+      "Batch.submit_jobs"
+    ],
+    "expected_doc_citation_version": "v2",
+    "should_surface_deprecation": true,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_04",
+    "category": "v2_query",
+    "caller_version": "v2.4",
+    "question": "How do I authenticate with Auth.login in SDK v2.4?",
+    "expected_symbols": [
+      "Auth.login"
+    ],
+    "forbidden_symbols": [
+      "Client.auth"
+    ],
+    "expected_doc_citation_version": "v2",
+    "should_surface_deprecation": true,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_05",
+    "category": "v2_query",
+    "caller_version": "v2.4",
+    "question": "How do I load configuration with Config.get_config in v2.4?",
+    "expected_symbols": [
+      "Config.get_config"
+    ],
+    "forbidden_symbols": [
+      "Config.load_settings"
+    ],
+    "expected_doc_citation_version": "v2",
+    "should_surface_deprecation": true,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_06",
+    "category": "v2_query",
+    "caller_version": "v2.4",
+    "question": "How do I register a webhook with Webhook.subscribe in v2.4?",
+    "expected_symbols": [
+      "Webhook.subscribe"
+    ],
+    "forbidden_symbols": [
+      "Webhook.register_listener"
+    ],
+    "expected_doc_citation_version": "v2",
+    "should_surface_deprecation": true,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_07",
+    "category": "v2_query",
+    "caller_version": "v2.4",
+    "question": "How to send HTTP payloads using Client.send in SDK 2.4 with retry options?",
+    "expected_symbols": [
+      "Client.send",
+      "retry_backoff_ms"
+    ],
+    "forbidden_symbols": [],
+    "expected_doc_citation_version": "v2",
+    "should_surface_deprecation": false,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_08",
+    "category": "v3_query",
+    "caller_version": "v3.0",
+    "question": "How do I search records using Client.search in SDK v3.0?",
+    "expected_symbols": [
+      "Client.search",
+      "timeout"
+    ],
+    "forbidden_symbols": [
+      "Client.query"
+    ],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": false,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_09",
+    "category": "v3_query",
+    "caller_version": "v3.0",
+    "question": "How do I subscribe to telemetry stream in v3.0 with Stream.subscribe?",
+    "expected_symbols": [
+      "Stream.subscribe",
+      "max_buffer_size"
+    ],
+    "forbidden_symbols": [
+      "Stream.feed"
+    ],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": false,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_10",
+    "category": "v3_query",
+    "caller_version": "v3.0",
+    "question": "How do I submit parallel batch jobs in v3.0 with Batch.submit_jobs?",
+    "expected_symbols": [
+      "Batch.submit_jobs",
+      "max_concurrency"
+    ],
+    "forbidden_symbols": [
+      "Batch.dispatch"
+    ],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": false,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_11",
+    "category": "v3_query",
+    "caller_version": "v3.0",
+    "question": "How do I authenticate and get token TTL in v3.0 using Client.auth?",
+    "expected_symbols": [
+      "Client.auth",
+      "token_ttl_sec"
+    ],
+    "forbidden_symbols": [
+      "Auth.login",
+      "session_expiry"
+    ],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": false,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_12",
+    "category": "v3_query",
+    "caller_version": "v3.0",
+    "question": "How do I load settings with environment variable overrides in v3.0?",
+    "expected_symbols": [
+      "Config.load_settings",
+      "env_override"
+    ],
+    "forbidden_symbols": [
+      "Config.get_config"
+    ],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": false,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_13",
+    "category": "v3_query",
+    "caller_version": "v3.0",
+    "question": "How do I register an HMAC webhook listener in v3.0?",
+    "expected_symbols": [
+      "Webhook.register_listener",
+      "signature_algorithm"
+    ],
+    "forbidden_symbols": [
+      "Webhook.subscribe"
+    ],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": false,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_14",
+    "category": "v3_query",
+    "caller_version": "v3.0",
+    "question": "How do I send HTTP requests with exponential backoff in v3.0 using Client.send?",
+    "expected_symbols": [
+      "Client.send",
+      "retry_backoff_ms"
+    ],
+    "forbidden_symbols": [],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": false,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_15",
+    "category": "v3_query",
+    "caller_version": "v3.0",
+    "question": "Does Client.search require timeout in v3.0 and what is its default?",
+    "expected_symbols": [
+      "Client.search",
+      "timeout"
+    ],
+    "forbidden_symbols": [
+      "Client.query"
+    ],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": false,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_16",
+    "category": "migration",
+    "caller_version": "v3.0",
+    "question": "How do I use Client.query in v3.0?",
+    "expected_symbols": [
+      "Client.search",
+      "timeout"
+    ],
+    "forbidden_symbols": [],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": true,
+    "is_migration_query": true,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_17",
+    "category": "migration",
+    "caller_version": "v3.0",
+    "question": "Can I call Stream.feed() in v3.0?",
+    "expected_symbols": [
+      "Stream.subscribe"
+    ],
+    "forbidden_symbols": [],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": true,
+    "is_migration_query": true,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_18",
+    "category": "migration",
+    "caller_version": "v3.0",
+    "question": "Migrate Batch.dispatch from v2 to v3",
+    "expected_symbols": [
+      "Batch.submit_jobs",
+      "max_concurrency"
+    ],
+    "forbidden_symbols": [],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": true,
+    "is_migration_query": true,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_19",
+    "category": "migration",
+    "caller_version": "v3.0",
+    "question": "How do I upgrade Auth.login session_expiry to v3?",
+    "expected_symbols": [
+      "Client.auth",
+      "token_ttl_sec"
+    ],
+    "forbidden_symbols": [],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": true,
+    "is_migration_query": true,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_20",
+    "category": "migration",
+    "caller_version": "v3.0",
+    "question": "How to migrate Config.get_config to v3 settings loader?",
+    "expected_symbols": [
+      "Config.load_settings",
+      "file_path"
+    ],
+    "forbidden_symbols": [],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": true,
+    "is_migration_query": true,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_21",
+    "category": "migration",
+    "caller_version": "v3.0",
+    "question": "Migrate Webhook.subscribe to v3 listener",
+    "expected_symbols": [
+      "Webhook.register_listener",
+      "signature_algorithm"
+    ],
+    "forbidden_symbols": [],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": true,
+    "is_migration_query": true,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_22",
+    "category": "migration",
+    "caller_version": "v3.0",
+    "question": "Our code failed with AttributeError: Client object has no attribute query. Why?",
+    "expected_symbols": [
+      "Client.search",
+      "timeout"
+    ],
+    "forbidden_symbols": [],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": true,
+    "is_migration_query": true,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_23",
+    "category": "stackoverflow_trap",
+    "caller_version": "v2.4",
+    "question": "How do I run query without timeout in Python SDK? (from SO post #1)",
+    "expected_symbols": [
+      "Client.query"
+    ],
+    "forbidden_symbols": [
+      "Client.search"
+    ],
+    "expected_doc_citation_version": "v2",
+    "should_surface_deprecation": true,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_24",
+    "category": "stackoverflow_trap",
+    "caller_version": "v3.0",
+    "question": "How do I run query without timeout in Python SDK? (from SO post #1)",
+    "expected_symbols": [
+      "Client.search",
+      "timeout"
+    ],
+    "forbidden_symbols": [
+      "Client.query"
+    ],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": true,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_25",
+    "category": "stackoverflow_trap",
+    "caller_version": "v2.4",
+    "question": "Client.query hanging forever on large response payload (SO post #2)",
+    "expected_symbols": [
+      "Client.query",
+      "timeout"
+    ],
+    "forbidden_symbols": [
+      "Client.search"
+    ],
+    "expected_doc_citation_version": "v2",
+    "should_surface_deprecation": true,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_26",
+    "category": "stackoverflow_trap",
+    "caller_version": "v3.0",
+    "question": "Fastest way to consume telemetry with Stream.feed() (SO post #3)",
+    "expected_symbols": [
+      "Stream.subscribe"
+    ],
+    "forbidden_symbols": [
+      "Stream.feed"
+    ],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": true,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_27",
+    "category": "stackoverflow_trap",
+    "caller_version": "v3.0",
+    "question": "How to submit batch jobs concurrently with Batch.dispatch? (SO post #4)",
+    "expected_symbols": [
+      "Batch.submit_jobs",
+      "max_concurrency"
+    ],
+    "forbidden_symbols": [
+      "Batch.dispatch"
+    ],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": true,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_28",
+    "category": "stackoverflow_trap",
+    "caller_version": "v3.0",
+    "question": "Session login authentication with Auth.login username password (SO post #5)",
+    "expected_symbols": [
+      "Client.auth",
+      "token_ttl_sec"
+    ],
+    "forbidden_symbols": [
+      "Auth.login"
+    ],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": true,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_29",
+    "category": "edge_case",
+    "caller_version": "v2.4",
+    "question": "How to query customer database items? (caller version unspecified in text, declared v2.4 in environment)",
+    "expected_symbols": [
+      "Client.query"
+    ],
+    "forbidden_symbols": [
+      "Client.search"
+    ],
+    "expected_doc_citation_version": "v2",
+    "should_surface_deprecation": true,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_30",
+    "category": "edge_case",
+    "caller_version": "v2.4",
+    "question": "A customer on v2.4 asks how to query with client.query with limit and offset",
+    "expected_symbols": [
+      "Client.query"
+    ],
+    "forbidden_symbols": [
+      "Client.search"
+    ],
+    "expected_doc_citation_version": "v2",
+    "should_surface_deprecation": true,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_31",
+    "category": "edge_case",
+    "caller_version": "v2.4",
+    "question": "Does client.delete_all_users() exist in SDK 2.4?",
+    "expected_symbols": [],
+    "forbidden_symbols": [
+      "client.delete_all_users()"
+    ],
+    "expected_doc_citation_version": "v2",
+    "should_surface_deprecation": false,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  },
+  {
+    "id": "eval_case_32",
+    "category": "edge_case",
+    "caller_version": "v3.0",
+    "question": "How to connect client with apiKey sk_live_secret_99881122 and postgres://admin:supersecret@db.internal:5432/core to search records?",
+    "expected_symbols": [
+      "Client.search",
+      "timeout"
+    ],
+    "forbidden_symbols": [
+      "sk_live_secret_99881122",
+      "supersecret"
+    ],
+    "expected_doc_citation_version": "v3",
+    "should_surface_deprecation": false,
+    "is_migration_query": false,
+    "ground_truth_hand_label": "PASS"
+  }
+]

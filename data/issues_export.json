@@ -1,0 +1,202 @@
+[
+  {
+    "ticket_id": "TICKET-1001",
+    "title": "I copied this from your docs: client.query() failed with AttributeError in production (#1)",
+    "reported_version": "v3.0.0",
+    "description": "Customer deployed code copying client.query() onto v3.0 and hit AttributeError.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1002",
+    "title": "timeout parameter is mandatory in v3.0 Client.search() (#2)",
+    "reported_version": "v3.0.0",
+    "description": "Omitting timeout in client.search() throws ValueError: timeout parameter is mandatory.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1003",
+    "title": "Stream.feed() does not exist in v3.0 SDK (#3)",
+    "reported_version": "v3.0.0",
+    "description": "Migrated service broke on startup: AttributeError: type object Stream has no attribute feed.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1004",
+    "title": "Batch.dispatch payloads argument renamed to job_list in v3 (#4)",
+    "reported_version": "v3.0.0",
+    "description": "TypeError: Batch.submit_jobs() got unexpected keyword argument payloads.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1005",
+    "title": "Auth.login is gone in v3, how do we authenticate service workers? (#5)",
+    "reported_version": "v3.0.0",
+    "description": "Customer confused about OAuth token endpoint replacement.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1006",
+    "title": "v2.4 documentation shows client.query works fine, why did our v3 build break? (#6)",
+    "reported_version": "v2.4 vs v3",
+    "description": "DevRel team ticket: version confusion between dual live versions.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1007",
+    "title": "Config.get_config path parameter fails in v3.0 (#7)",
+    "reported_version": "v3.0.0",
+    "description": "Replaced by Config.load_settings with file_path.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1008",
+    "title": "Webhook.subscribe requires HMAC signature algorithm in v3 (#8)",
+    "reported_version": "v3.0.0",
+    "description": "v3 requires explicit signature_algorithm.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1009",
+    "title": "I copied this from your docs: client.query() failed with AttributeError in production (#9)",
+    "reported_version": "v3.0.0",
+    "description": "Customer deployed code copying client.query() onto v3.0 and hit AttributeError.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1010",
+    "title": "timeout parameter is mandatory in v3.0 Client.search() (#10)",
+    "reported_version": "v3.0.0",
+    "description": "Omitting timeout in client.search() throws ValueError: timeout parameter is mandatory.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1011",
+    "title": "Stream.feed() does not exist in v3.0 SDK (#11)",
+    "reported_version": "v3.0.0",
+    "description": "Migrated service broke on startup: AttributeError: type object Stream has no attribute feed.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1012",
+    "title": "Batch.dispatch payloads argument renamed to job_list in v3 (#12)",
+    "reported_version": "v3.0.0",
+    "description": "TypeError: Batch.submit_jobs() got unexpected keyword argument payloads.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1013",
+    "title": "Auth.login is gone in v3, how do we authenticate service workers? (#13)",
+    "reported_version": "v3.0.0",
+    "description": "Customer confused about OAuth token endpoint replacement.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1014",
+    "title": "v2.4 documentation shows client.query works fine, why did our v3 build break? (#14)",
+    "reported_version": "v2.4 vs v3",
+    "description": "DevRel team ticket: version confusion between dual live versions.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1015",
+    "title": "Config.get_config path parameter fails in v3.0 (#15)",
+    "reported_version": "v3.0.0",
+    "description": "Replaced by Config.load_settings with file_path.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1016",
+    "title": "Webhook.subscribe requires HMAC signature algorithm in v3 (#16)",
+    "reported_version": "v3.0.0",
+    "description": "v3 requires explicit signature_algorithm.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1017",
+    "title": "I copied this from your docs: client.query() failed with AttributeError in production (#17)",
+    "reported_version": "v3.0.0",
+    "description": "Customer deployed code copying client.query() onto v3.0 and hit AttributeError.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1018",
+    "title": "timeout parameter is mandatory in v3.0 Client.search() (#18)",
+    "reported_version": "v3.0.0",
+    "description": "Omitting timeout in client.search() throws ValueError: timeout parameter is mandatory.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1019",
+    "title": "Stream.feed() does not exist in v3.0 SDK (#19)",
+    "reported_version": "v3.0.0",
+    "description": "Migrated service broke on startup: AttributeError: type object Stream has no attribute feed.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1020",
+    "title": "Batch.dispatch payloads argument renamed to job_list in v3 (#20)",
+    "reported_version": "v3.0.0",
+    "description": "TypeError: Batch.submit_jobs() got unexpected keyword argument payloads.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1021",
+    "title": "Auth.login is gone in v3, how do we authenticate service workers? (#21)",
+    "reported_version": "v3.0.0",
+    "description": "Customer confused about OAuth token endpoint replacement.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1022",
+    "title": "v2.4 documentation shows client.query works fine, why did our v3 build break? (#22)",
+    "reported_version": "v2.4 vs v3",
+    "description": "DevRel team ticket: version confusion between dual live versions.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1023",
+    "title": "Config.get_config path parameter fails in v3.0 (#23)",
+    "reported_version": "v3.0.0",
+    "description": "Replaced by Config.load_settings with file_path.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1024",
+    "title": "Webhook.subscribe requires HMAC signature algorithm in v3 (#24)",
+    "reported_version": "v3.0.0",
+    "description": "v3 requires explicit signature_algorithm.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  },
+  {
+    "ticket_id": "TICKET-1025",
+    "title": "I copied this from your docs: client.query() failed with AttributeError in production (#25)",
+    "reported_version": "v3.0.0",
+    "description": "Customer deployed code copying client.query() onto v3.0 and hit AttributeError.",
+    "status": "OPEN",
+    "root_cause": "Integrator copied code without version scoping or breaking migration check"
+  }
+]

@@ -1,34 +1,7 @@
-=== SUITE EXECUTION 1: RED (BEFORE FIX - PROMPT v1.2.0) ===
-Pass count: 10/11 passed (1 FAILED)
-
-[EVAL SUITE] Initialized with Prompt Version: v1.2.0
-
-..........F
-======================================================================
-FAIL: test_case_11_customer_incident_telemetry_stream (tests.test_deprecation_eval.TestDeprecationEvaluationSuite)
-q11: Customer Incident (Week 11 Drill).
+................................
 ----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "/Users/softsuave/Documents/LS/ai-learning/tests/test_deprecation_eval.py", line 142, in test_case_11_customer_incident_telemetry_stream
-    res = self._evaluate_case(incident_query)
-  File "/Users/softsuave/Documents/LS/ai-learning/tests/test_deprecation_eval.py", line 56, in _evaluate_case
-    self.assertTrue(no_dep_ok, f"Deprecation Violation: {no_dep_msg}")
-AssertionError: False is not true : Deprecation Violation: Contains deprecated token/method matching pattern '\bStream\.feed\b': matched 'Stream.feed'
-
-----------------------------------------------------------------------
-Ran 11 tests in 0.007s
-
-FAILED (failures=1)
-
-================================================================================
-
-=== SUITE EXECUTION 2: GREEN (AFTER FIX - PROMPT v1.3.0) ===
-Pass count: 11/11 passed (0 FAILED, ZERO REGRESSIONS)
-
-[EVAL SUITE] Initialized with Prompt Version: v1.3.0
-
-...........
-----------------------------------------------------------------------
-Ran 11 tests in 0.005s
+Ran 32 tests in 0.024s
 
 OK
+
+[INTEGRATED EVAL SUITE] Initialized (Mode: GREEN, Cases: 32)

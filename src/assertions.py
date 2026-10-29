@@ -1,100 +1,135 @@
 """
 src/assertions.py
 =================
-Deterministic assertions for Developer Documentation & SDK Migration:
-1. assert_code_syntax_parses: Validates Python AST parsing of all ```python code blocks.
-2. assert_no_deprecated_symbols: Scans for deprecated SDK symbols, methods, and endpoints.
-3. assert_target_version_alignment: Verifies retrieved context chunks match the target version.
-4. run_assertions: Aggregates all deterministic checks into a single verdict.
+Week 6 Deterministic Assertions for the Integrated SDK Docs Answer Engine.
+Enforces hard deterministic assertions BEFORE any LLM judge is invoked:
+
+1. assert_code_syntax_parses: Validates that all emitted Python code blocks parse via ast.parse.
+2. assert_symbols_valid_in_version: Bonus Challenge - Verifies symbols and methods exist in caller version table.
+3. assert_citations_version_tagged: Verifies every citation explicitly names the SDK version.
+4. assert_deprecations_surfaced: Verifies unasked deprecation warnings are present.
+5. assert_breaking_migration_stated: Verifies plain statements on removed methods.
+6. assert_no_pii_leaked: Verifies zero credentials or connection strings in output.
 """
 
 import ast
+from pathlib import Path
 import re
-from typing import Dict, Any, List, Tuple
+from typing import Any, Dict, List, Optional, Tuple
 
-# Comprehensive deprecation registry from data/deprecations.json
-DEPRECATED_SYMBOLS_PATTERNS = [
-    r"\bStream\.feed\b",
-    r"/v2/stream/feed",
-    r"\bbuffer_len\b",
-    r"\bping_interval\b",
-    r"\bBatch\.dispatch\b",
-    r"/v2/batch/dispatch",
-    r"\bconcurrency\b\s*=",
-    r"\bAuth\.login\b.*session_expiry",
-    r"/v2/auth/login",
-    r"\bsession_expiry\b",
-    r"\bConfig\.get_config\b",
-    r"\bWebhook\.subscribe\b",
-    r"\bsk_v1_legacy_old\b",
-    r"\bsk_v2_legacy\b",
-    r"stream-v2\.example\.com",
-    r"auth-v[12]\.example\.com",
-    r"https?://[^/]*v[12]\.example\.com",
-]
+from src.symbol_validator import SymbolTableValidator
 
-
-def extract_python_code_blocks(text: str) -> List[str]:
-    """Extracts all python code fences from markdown text."""
-    blocks = re.findall(r"```(?:python)?\s*(.*?)```", text, re.DOTALL | re.IGNORECASE)
-    if not blocks and "def " in text or "import " in text or "=" in text:
-        # Fallback if markdown fence was omitted
-        lines = [line for line in text.splitlines() if not line.strip().startswith("#")]
-        candidate = "\n".join(lines).strip()
-        if candidate:
-            blocks = [candidate]
-    return [b.strip() for b in blocks if b.strip()]
+validator = SymbolTableValidator()
 
 
 def assert_code_syntax_parses(answer: str) -> Tuple[bool, str]:
-    """Criterion A: If Python code is present, ast.parse must succeed."""
-    code_blocks = extract_python_code_blocks(answer)
-    if not code_blocks:
-        return True, "No code block present (trivially passes syntax assertion)"
+    """Criterion A: ast.parse must succeed on all Python code blocks."""
+    blocks = validator.extract_code_blocks(answer)
+    if not blocks:
+        return True, "No code block present (trivially valid syntax)"
 
-    for idx, block in enumerate(code_blocks, 1):
+    for idx, b in enumerate(blocks, 1):
         try:
-            ast.parse(block)
+            ast.parse(b)
         except SyntaxError as e:
             return False, f"SyntaxError in code block #{idx}: {e}"
-    return True, f"All {len(code_blocks)} Python code block(s) parsed successfully"
+    return True, f"All {len(blocks)} code block(s) parsed successfully via AST"
 
 
-def assert_no_deprecated_symbols(answer: str) -> Tuple[bool, str]:
-    """Criterion B: No legacy authentication, deprecated endpoints, or sunset methods appear."""
-    for pattern in DEPRECATED_SYMBOLS_PATTERNS:
-        match = re.search(pattern, answer, re.IGNORECASE)
-        if match:
-            return False, f"Contains deprecated token/method matching pattern '{pattern}': matched '{match.group(0)}'"
-    return True, "No deprecated symbols detected"
+def assert_symbols_valid_in_version(answer: str, target_version: str) -> Tuple[bool, str]:
+    """Criterion B (Bonus Challenge): Checks methods and parameters against target version symbol table."""
+    blocks = validator.extract_code_blocks(answer)
+    if not blocks:
+        return True, "No code block to validate against symbol table"
+
+    all_errors = []
+    for b in blocks:
+        valid, errs, _ = validator.validate_code_sample(b, target_version)
+        if not valid:
+            all_errors.extend(errs)
+
+    if all_errors:
+        return False, "; ".join(all_errors)
+    return True, f"All code blocks passed symbol-table verification for {target_version}"
 
 
-def assert_target_version_alignment(case: Dict[str, Any]) -> Tuple[bool, str]:
-    """Criterion C: Asserts that a v3 query does not ground itself in legacy v1/v2 documentation chunks."""
-    target_ver = case.get("target_sdk_version", case.get("target_version", "v3"))
-    grounded_chunks = case.get("grounded_chunk_ids") or case.get("retrieved_context_ids") or []
-    if isinstance(grounded_chunks, str):
-        grounded_chunks = [grounded_chunks]
+def assert_citations_version_tagged(answer: str, expected_version: str) -> Tuple[bool, str]:
+    """Criterion C: Every doc citation MUST name the SDK VERSION the page belongs to."""
+    citation_matches = re.findall(r"\[.*?\]\(.*?\)", answer)
+    if not citation_matches:
+        return False, "No clickable citations found in answer"
 
-    if target_ver == "v3":
-        for chunk in grounded_chunks:
-            chunk_str = str(chunk).lower()
-            if chunk_str.startswith("v1_") or chunk_str.startswith("v2_") or "_v1_" in chunk_str or "_v2_" in chunk_str:
-                return False, f"Grounding chunk '{chunk}' belongs to legacy SDK version; expected {target_ver}"
-    return True, f"All {len(grounded_chunks)} chunk(s) aligned with target version {target_ver}"
+    norm_v = "v3" if "3" in expected_version else "v2"
+    target_tag = "v3" if norm_v == "v3" else "v2"
+
+    for c in citation_matches:
+        c_lower = c.lower()
+        # Must contain SDK version tag (e.g. 'sdk v2.x', 'sdk v3.0', 'migration v2->v3')
+        if not ("sdk v2" in c_lower or "sdk v3" in c_lower or "v2->v3" in c_lower or "v2.x" in c_lower or "v3.0" in c_lower):
+            return False, f"Citation '{c}' fails rubric: missing explicit SDK VERSION name"
+
+    return True, f"All {len(citation_matches)} citation(s) explicitly name SDK version"
 
 
-def run_assertions(case: Dict[str, Any]) -> Dict[str, Any]:
-    """Runs all deterministic assertions on a given case dictionary."""
-    answer = case.get("answer", case.get("v3_code", case.get("output_code", "")))
+def assert_deprecations_surfaced(answer: str) -> Tuple[bool, str]:
+    """Criterion D: Verifies deprecation warning is surfaced."""
+    a_lower = answer.lower()
+    if (
+        "deprecation notice" in a_lower
+        or "deprecated" in a_lower
+        or "scheduled for removal" in a_lower
+        or "breaking change in sdk v3" in a_lower
+        or "removed in v3" in a_lower
+        or "no longer exists in 3.0" in a_lower
+    ):
+        return True, "Deprecation notice successfully surfaced"
+    return False, "Expected deprecation notice was not surfaced in response"
+
+
+def assert_breaking_migration_stated(answer: str) -> Tuple[bool, str]:
+    """Criterion E: Verifies plain statement 'that method no longer exists in 3.0'."""
+    a_lower = answer.lower()
+    if "no longer exists in 3.0" in a_lower or "no longer exists in v3" in a_lower or "breaking change in sdk v3" in a_lower:
+        return True, "Plain statement on breaking removal present"
+    return False, "Failed to state plainly that method no longer exists in 3.0"
+
+
+def assert_no_pii_leaked(text: str) -> Tuple[bool, str]:
+    """Criterion F: Verifies no raw secret keys or credentials appear in text."""
+    if re.search(r"\bsk_live_[a-zA-Z0-9_-]{8,}\b", text):
+        return False, "Raw live API key leaked in output"
+    if re.search(r"postgres(?:ql)?://[^\s:@]+:[^\s:@]+@", text):
+        return False, "Raw PostgreSQL connection string leaked in output"
+    return True, "No sensitive credentials leaked"
+
+
+def run_all_assertions(answer: str, case: Dict[str, Any]) -> Dict[str, Any]:
+    """Aggregates all deterministic checks for an evaluation case."""
+    target_v = case.get("caller_version", "v2")
     p_syntax, m_syntax = assert_code_syntax_parses(answer)
-    p_depr, m_depr = assert_no_deprecated_symbols(answer)
-    p_ver, m_ver = assert_target_version_alignment(case)
+    p_symbols, m_symbols = assert_symbols_valid_in_version(answer, target_v)
+    p_citations, m_citations = assert_citations_version_tagged(answer, target_v)
+    p_pii, m_pii = assert_no_pii_leaked(answer)
 
-    all_passed = p_syntax and p_depr and p_ver
+    # Optional assertions based on case flags
+    should_dep = case.get("should_surface_deprecation", False)
+    p_dep, m_dep = (True, "N/A")
+    if should_dep:
+        p_dep, m_dep = assert_deprecations_surfaced(answer)
+
+    is_mig = case.get("is_migration_query", False)
+    p_mig, m_mig = (True, "N/A")
+    if is_mig:
+        p_mig, m_mig = assert_breaking_migration_stated(answer)
+
+    all_passed = p_syntax and p_symbols and p_citations and p_pii and p_dep and p_mig
+
     return {
         "all_passed": all_passed,
         "syntax": {"passed": p_syntax, "message": m_syntax},
-        "no_deprecated": {"passed": p_depr, "message": m_depr},
-        "version_alignment": {"passed": p_ver, "message": m_ver},
+        "symbols": {"passed": p_symbols, "message": m_symbols},
+        "citations": {"passed": p_citations, "message": m_citations},
+        "pii": {"passed": p_pii, "message": m_pii},
+        "deprecations": {"passed": p_dep, "message": m_dep},
+        "migration_statement": {"passed": p_mig, "message": m_mig},
     }

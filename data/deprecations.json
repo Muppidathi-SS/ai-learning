@@ -1,6 +1,14 @@
 {
   "deprecations": [
     {
+      "symbol": "Client.query",
+      "version": "v2",
+      "status": "removed",
+      "replacement": "Client.search",
+      "sunset_version": "v3.0",
+      "reason": "Client.query() is removed in v3.0. Replaced by Client.search(). In v3.0, the timeout parameter is mandatory."
+    },
+    {
       "symbol": "Client.send.timeout",
       "version": "v1",
       "status": "deprecated",
@@ -25,60 +33,68 @@
       "reason": "Replaced session expiration with OAuth2/JWT token TTL in seconds."
     },
     {
+      "symbol": "Auth.login",
+      "version": "v2",
+      "status": "removed",
+      "replacement": "/v3/auth/token",
+      "sunset_version": "v3.0",
+      "reason": "Direct session login endpoint deprecated in favor of granular scoped OAuth token endpoint (/v3/auth/token) via Client.auth(token_ttl_sec=3600)."
+    },
+    {
       "symbol": "/v2/auth/login",
       "version": "v2",
       "status": "deprecated",
       "replacement": "/v3/auth/token",
-      "sunset_version": "v3",
+      "sunset_version": "v3.0",
       "reason": "Direct session login endpoint deprecated in favor of granular scoped OAuth token endpoint. Default TTL lowered from 7200s to 3600s."
     },
     {
       "symbol": "Batch.dispatch",
       "version": "v2",
-      "status": "deprecated",
+      "status": "removed",
       "replacement": "Batch.submit_jobs",
-      "sunset_version": "v3",
-      "reason": "dispatch() is deprecated. submit_jobs() replaces payloads parameter with job_list and concurrency with max_concurrency, adding auto_retry_failed."
+      "sunset_version": "v3.0",
+      "reason": "dispatch() is removed in v3.0. submit_jobs() replaces payloads parameter with job_list and concurrency with max_concurrency, adding auto_retry_failed."
     },
     {
       "symbol": "/v2/batch/dispatch",
       "version": "v2",
       "status": "deprecated",
       "replacement": "/v3/batch/submit_jobs",
-      "sunset_version": "v3",
+      "sunset_version": "v3.0",
       "reason": "REST endpoint /v2/batch/dispatch replaced by /v3/batch/submit_jobs."
     },
     {
       "symbol": "Stream.feed",
       "version": "v2",
-      "status": "deprecated",
+      "status": "removed",
       "replacement": "Stream.subscribe",
-      "sunset_version": "v3",
-      "reason": "Stream.feed() replaced by Stream.subscribe(). Parameters buffer_len renamed to max_buffer_size (default 1024), ping_interval changed to keep_alive_ping_ms (5000ms)."
+      "sunset_version": "v3.0",
+      "reason": "Stream.feed() is removed in v3.0 and replaced by Stream.subscribe(). Parameters buffer_len renamed to max_buffer_size (default 1024), ping_interval changed to keep_alive_ping_ms (5000ms)."
     },
     {
       "symbol": "/v2/stream/feed",
       "version": "v2",
       "status": "deprecated",
       "replacement": "/v3/stream/subscribe",
-      "sunset_version": "v3",
+      "sunset_version": "v3.0",
       "reason": "WebSocket feed endpoint renamed to /v3/stream/subscribe."
     },
     {
       "symbol": "Config.get_config",
       "version": "v2",
-      "status": "deprecated",
+      "status": "removed",
       "replacement": "Config.load_settings",
-      "sunset_version": "v3",
-      "reason": "Config.get_config() deprecated in favor of Config.load_settings(). Parameter path renamed to file_path with env_override support."
+      "sunset_version": "v3.0",
+      "reason": "Config.get_config() is removed in v3.0 in favor of Config.load_settings(). Parameter path renamed to file_path with env_override support."
     },
     {
       "symbol": "Webhook.subscribe",
       "version": "v2",
-      "status": "deprecated",
+      "status": "removed",
       "replacement": "Webhook.register_listener",
-      "sunset_version": "v3",
-      "reason": "Webhook.subscribe() replaced by register_listener(). Parameter callback_url renamed to target_url, requires signature_algorithm."
+      "sunset_version": "v3.0",
+      "reason": "Webhook.subscribe() is removed in v3.0 and replaced by register_listener(). Parameter callback_url renamed to target_url, requires signature_algorithm."
     }
   ]
 }

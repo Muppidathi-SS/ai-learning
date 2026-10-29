@@ -1,56 +1,58 @@
 {
-  "trace_id": "tr_prod_20261016_8831f4",
-  "timestamp": "2026-10-16T14:22:18.412Z",
-  "user_id": "usr_dev_4821",
-  "query": "How do I connect and consume real-time telemetry updates in Python?",
-  "status_code": 200,
-  "prompt_version": "v1.2.0",
-  "retrieved_context_ids": [
-    "v2_stream_v2_struct_000",
-    "v2_stream_v2_struct_001"
-  ],
-  "output_text": "Here is how you consume live telemetry events using the Stream interface:\n```python\nfrom sdk import Stream\n\n# Connect to live real-time telemetry events\nstream = Stream.feed(channel=\"telemetry\", buffer_len=1024, ping_interval=5000)\nfor event in stream:\n    process(event)\n```\nThis feeds real-time updates directly into your processing pipeline.",
-  "output_code": "from sdk import Stream\n\n# Connect to live real-time telemetry events\nstream = Stream.feed(channel=\"telemetry\", buffer_len=1024, ping_interval=5000)\nfor event in stream:\n    process(event)\n",
+  "trace_id": "tr_sdk_20261029_3c50e",
+  "timestamp": "2026-10-29T09:29:34Z",
+  "raw_query_redacted": "How do I authenticate with apiKey [REDACTED_API_KEY] and postgres://[REDACTED_CONNECTION_STRING] to search records in v3.0?",
+  "caller_version_resolved": "v3",
+  "target_version_detailed": "v3.0",
+  "pii_line_held": true,
   "spans": {
-    "retrieval": {
-      "span_id": "tr_prod_20261016_8831f4-ret",
-      "name": "vector_retrieval",
-      "latency_ms": 124.5,
-      "input_tokens": 16,
-      "output_tokens": 412,
-      "cost_usd": 0.00062,
-      "context_chunk_ids": [
-        "v2_stream_v2_struct_000",
-        "v2_stream_v2_struct_001"
-      ]
+    "version_resolution": {
+      "span_id": "tr_sdk_20261029_3c50e-span-version",
+      "name": "caller_version_resolution",
+      "latency_ms": 2.51,
+      "caller_version_normalized": "v3",
+      "caller_version_detailed": "v3.0",
+      "cost_usd": 0.0
+    },
+    "mcp_tools": {
+      "span_id": "tr_sdk_20261029_3c50e-span-mcp-tools",
+      "name": "mcp_tool_execution_hop",
+      "latency_ms": 45.58,
+      "tools_called": [
+        "version_scoped_doc_search",
+        "symbol_exists_check"
+      ],
+      "trace_id": "tr_sdk_20261029_3c50e",
+      "retrieved_count": 3,
+      "cost_usd": 0.000302
     },
     "generation": {
-      "span_id": "tr_prod_20261016_8831f4-gen",
+      "span_id": "tr_sdk_20261029_3c50e-span-llm-generation",
       "name": "llm_code_synthesis",
-      "latency_ms": 1180.2,
-      "prompt_tokens": 580,
-      "completion_tokens": 145,
-      "cost_usd": 0.00116,
-      "prompt_version": "v1.2.0"
+      "latency_ms": 650.01,
+      "prompt_tokens": 700,
+      "completion_tokens": 206,
+      "cost_usd": 0.001462
     },
-    "tools": {
-      "span_id": "tr_prod_20261016_8831f4-tool",
-      "name": "deprecation_checker",
-      "latency_ms": 45.3,
-      "cost_usd": 0.0,
-      "tool_calls": [
-        "check_deprecation"
-      ]
+    "symbol_validation": {
+      "span_id": "tr_sdk_20261029_3c50e-span-symbol-validation",
+      "name": "symbol_table_ast_verification",
+      "latency_ms": 8.11,
+      "code_blocks_checked": 1,
+      "symbol_valid": true,
+      "errors": [],
+      "cost_usd": 0.0
     }
   },
-  "total_latency_ms": 1350.0,
-  "total_tokens": 741,
-  "total_cost_usd": 0.00178,
-  "emitted_symbols": [
-    "Stream.feed",
-    "buffer_len",
-    "ping_interval",
-    "process"
+  "total_latency_ms": 706.21,
+  "total_tokens": 906,
+  "total_cost_usd": 0.001764,
+  "ast_valid": true,
+  "symbol_table_valid": true,
+  "citations": [
+    "[migration_guide.md (SDK Migration v2->v3)](docs/migration_guide.md#L1-L30)",
+    "[client_v3.txt (SDK v3.0)](data/v3/client_v3.txt#L1-L30)",
+    "[CHANGELOG.md (SDK Changelog v3.0)](CHANGELOG.md#L1-L30)"
   ],
-  "deprecated_symbol_emitted": true
+  "answer_text": "**Target SDK Version:** `v3.0` (Partition: `v3`)\n\nHere is the runnable code snippet conforming to SDK v3.0 specifications:\n\n```python\nfrom sdk import Client\n\n# SDK v3.0 Search Implementation\nclient = Client(api_key=\"sk_live_v3_key\")\n# Note: timeout is strictly mandatory in v3.0 Client.search\nresults = client.search(payload={\"status\": \"active\"}, timeout=30)\nfor item in results:\n    print(item[\"id\"])\n```\n\n### Clickable Citations:\n- [migration_guide.md (SDK Migration v2->v3)](docs/migration_guide.md#L1-L30)\n- [client_v3.txt (SDK v3.0)](data/v3/client_v3.txt#L1-L30)\n- [CHANGELOG.md (SDK Changelog v3.0)](CHANGELOG.md#L1-L30)"
 }
